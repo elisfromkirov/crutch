@@ -1,0 +1,11 @@
+# JetBrains settings directory
+.idea
+
+# Visual Studio Code settings derectory
+.vscode
+
+# CMake build directory
+build
+
+# MacOS specific files
+.DS_Store
