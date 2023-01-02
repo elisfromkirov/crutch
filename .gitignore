@@ -1,10 +1,13 @@
-# JetBrains settings directory
+# CLion cache directory
 .idea
 
-# Visual Studio Code settings derectory
+# VSCode cache directory
 .vscode
 
-# CMake build directory
+# CLion CMake build directory
+cmake-build-debug
+
+# VSCode CMake build directory
 build
 
 # MacOS specific files
