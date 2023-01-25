@@ -1,4 +1,4 @@
-#ifndef UTILITY_IMPL
+#ifndef PLACEMENT_IMPL
 #error Do not include this file directly
 #endif
 

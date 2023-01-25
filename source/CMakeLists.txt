@@ -1,11 +1,7 @@
 add_library(crutch)
 
-file(GLOB_RECURSE CRUTCH_INCLUDES *.hpp)
-file(GLOB_RECURSE CRUTCH_INLINE_INCLUDES *.ipp)
-file(GLOB_RECURSE CRUTCH_SOURCES *.cpp)
-
-message(${CRUTCH_INCLUDES})
-message(${CRUTCH_SOURCES})
+file(GLOB_RECURSE CRUTCH_INCLUDE *.hpp)
+file(GLOB_RECURSE CRUTCH_SOURCE *.cpp)
 
 target_include_directories(crutch
     PUBLIC
@@ -14,8 +10,7 @@ target_include_directories(crutch
 
 target_sources(crutch
     PUBLIC
-        ${CRUTCH_INCLUDES}
-        ${CRUTCH_INLINE_INCLUDES}
+        ${CRUTCH_INCLUDE}
     PRIVATE
-        ${CRUTCH_SOURCES}
+        ${CRUTCH_SOURCE}
     )
