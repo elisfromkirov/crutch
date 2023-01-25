@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(source)
 add_subdirectory(test)
+add_subdirectory(third_party)

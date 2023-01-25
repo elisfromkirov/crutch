@@ -2,7 +2,7 @@
 
 #include <crutch/memory/unique_ptr.hpp>
 
-#include <crutch/test/reporter.hpp>
+#include <crutch/test/test_reporter.hpp>
 #include <crutch/test/test.hpp>
 
 #include <vector>

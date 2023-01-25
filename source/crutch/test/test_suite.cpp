@@ -1,5 +1,5 @@
 #include <crutch/test/assertion_failure.hpp>
-#include <crutch/test/suite.hpp>
+#include <crutch/test/test_suite.hpp>
 
 namespace crutch {
 

@@ -3,9 +3,12 @@
 #include <crutch/core/macros.hpp>
 
 #include <crutch/test/assertion_failure.hpp>
-#include <crutch/test/registrar.hpp>
-#include <crutch/test/suite.hpp>
+#include <crutch/test/console_reporter.hpp>
 #include <crutch/test/test.hpp>
+#include <crutch/test/test_engine.hpp>
+#include <crutch/test/test_registrar.hpp>
+#include <crutch/test/test_suite.hpp>
+
 
 #define ASSERT_EXPRESSION(expression)                                \
   if (!(expression)) {                                               \
@@ -30,11 +33,11 @@
 #define ASSERT_GE(x, y) \
   ASSERT_EXPRESSION((x) >= (y))
 
-#define TEST_SUITE_IMPL(test_suite_namespace, name) \
-  namespace test_suite_namespace {                  \
-    static ::crutch::TestSuite kSuite{name};        \
-  }                                                 \
-                                                    \
+#define TEST_SUITE_IMPL(test_suite_namespace, name)                                            \
+  namespace test_suite_namespace {                                                             \
+    static ::crutch::TestSuite& kSuite = ::crutch::TestEngine::Instance().MakeTestSuite(name); \
+  }                                                                                            \
+                                                                                               \
   namespace test_suite_namespace
 
 #define TEST_SUITE(name) \
@@ -66,3 +69,9 @@
   TEST_IMPL(CONCAT(TestRoutine, name), CONCAT(Test, name), TO_STRING(name), \
             CONCAT(kTestRegistrar, name))
 
+#define RUN_ALL_TESTS()                                             \
+  int main() {                                                      \
+    ::crutch::ConsoleReporter console_reporter{};                   \
+    ::crutch::TestEngine::Instance().RunAllTests(console_reporter); \
+    return 0;                                                       \
+  }

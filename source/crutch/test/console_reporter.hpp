@@ -1,6 +1,6 @@
 #pragma once
 
-#include <crutch/test/reporter.hpp>
+#include <crutch/test/test_reporter.hpp>
 
 namespace crutch {
 

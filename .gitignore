@@ -6,6 +6,7 @@
 
 # CLion CMake build directory
 cmake-build-debug
+cmake-build-release
 
 # VSCode CMake build directory
 build

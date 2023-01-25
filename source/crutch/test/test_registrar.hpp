@@ -2,7 +2,7 @@
 
 #include <crutch/concept/derived_from.hpp>
 
-#include <crutch/test/suite.hpp>
+#include <crutch/test/test_suite.hpp>
 #include <crutch/test/test.hpp>
 
 namespace crutch {
@@ -17,5 +17,5 @@ class TestRegistrar {
 }  // namespace crutch
 
 #define REGISTRAR_IMPL
-#include <crutch/test/registrar.ipp>
+#include <crutch/test/test_registrar.ipp>
 #undef REGISTRAR_IMPL
