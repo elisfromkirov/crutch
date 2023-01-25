@@ -1,4 +1,4 @@
-#include <crutch/utiltiy/assertion_failure.hpp>
+#include <crutch/test/assertion_failure.hpp>
 
 namespace crutch {
 

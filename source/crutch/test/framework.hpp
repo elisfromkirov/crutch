@@ -2,11 +2,10 @@
 
 #include <crutch/core/macros.hpp>
 
+#include <crutch/test/assertion_failure.hpp>
 #include <crutch/test/registrar.hpp>
 #include <crutch/test/suite.hpp>
 #include <crutch/test/test.hpp>
-
-#include <crutch/utiltiy/assertion_failure.hpp>
 
 #define ASSERT_EXPRESSION(expression)                                \
   if (!(expression)) {                                               \
