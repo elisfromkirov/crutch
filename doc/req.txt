@@ -1,0 +1,18 @@
+Add requirements on container element types (but how to call it correctly)
+
+template <typename Type>
+concept ContainerElement = !std::is_reference_v<Type> &&
+                           !std::is_void<type> &&
+                           std::is_nothrow_destructible;
+
+Container stores objects thus reference types and void type are not supported.
+Also, destructor must not throw an exception.
+
+New abilities added if Type satisfies more requirements.
+
+template <typename Type>
+concept Pointee = !std::is_reference_v<Type>;
+
+Pointers to references and references to references are not existed.
+
+TODO: correct names!

@@ -2,9 +2,6 @@
 #error Do not include this file directly
 #endif
 
-#include <new>
-#include <utility>
-
 namespace crutch {
 
 template <typename Type, typename... ArgTypes>

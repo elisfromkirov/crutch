@@ -7,20 +7,20 @@ namespace crutch {
 namespace detail {
 
 template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Type, Deleter>
+requires IsNotReference<Type> && DeleterFor<Deleter, Type>
 UniquePtrBase<Type, Deleter>::UniquePtrBase(Type* pointer) noexcept
     : pointer_{pointer} {
 }
 
 template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Type, Deleter>
+requires IsNotReference<Type> && DeleterFor<Deleter, Type>
 UniquePtrBase<Type, Deleter>::UniquePtrBase(UniquePtrBase&& other) noexcept
     : pointer_{other.pointer_} {
   other.pointer_ = nullptr;
 }
 
 template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Type, Deleter>
+requires IsNotReference<Type> && DeleterFor<Deleter, Type>
 UniquePtrBase<Type, Deleter>& UniquePtrBase<Type, Deleter>::operator=(
     UniquePtrBase&& other) noexcept {
   if (this == &other) {
@@ -34,17 +34,15 @@ UniquePtrBase<Type, Deleter>& UniquePtrBase<Type, Deleter>::operator=(
 }
 
 template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Type, Deleter>
+requires IsNotReference<Type> && DeleterFor<Deleter, Type>
 UniquePtrBase<Type, Deleter>::~UniquePtrBase() noexcept {
   Deleter::Delete(pointer_);
 }
 
 template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Type, Deleter>
+requires IsNotReference<Type> && DeleterFor<Deleter, Type>
 void UniquePtrBase<Type, Deleter>::Swap(UniquePtrBase& other) noexcept {
-  Type* pointer = other.pointer_;
-  other.pointer_ = pointer_;
-  pointer_ = pointer;
+  ::std::swap(pointer_, other.pointer_);
 }
 
 }  // namespace detail

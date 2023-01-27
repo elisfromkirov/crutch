@@ -1,15 +1,19 @@
 crutch/
+    allocator/
+        new
+        pool
 	container/
 	    array
 	    hash_map
+	    list
 	    map
 	    vector
 	core/
+	    assert
+	    macros
 	    types
 	functions/
 	    unique_function
-	hash/
-	    open_addressing_hash_table
 	intrusive/
 	    list
 	    node
@@ -21,9 +25,10 @@ crutch/
 	    result
 	reflect/
 	    reflect
+	string/
+	    view
 	test/
 	    framework
-	tree/
-	    red_black_tree
     utility/
+        placement
         source_location

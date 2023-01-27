@@ -8,7 +8,7 @@ namespace crutch {
 namespace detail {
 
 template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Type, Deleter>
+requires IsNotReference<Type> && DeleterFor<Deleter, Type>
 class UniquePtrBase {
  public:
   explicit UniquePtrBase(Type* pointer) noexcept;
