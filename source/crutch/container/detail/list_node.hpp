@@ -1,6 +1,6 @@
 #pragma once
 
-#include <crutch/concept/constructible_from.hpp>
+#include <crutch/concept/constructible.hpp>
 
 #include <crutch/core/assert.hpp>
 
@@ -12,7 +12,7 @@ template <typename Type>
 class ListNode {
  public:
   template <typename... ArgTypes>
-  requires ConstructibleFrom<Type, ArgTypes...>
+  requires Constructible<Type, ArgTypes...>
   explicit ListNode(ListNode* next, ListNode* prev, ArgTypes&&... args);
 
   [[nodiscard]]

@@ -1,0 +1,10 @@
+C:/Workspace/crutch/cmake-build-debug-visual-studio/CMakeFiles/edit_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/CMakeFiles/rebuild_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/source/CMakeFiles/crutch.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/source/CMakeFiles/edit_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/source/CMakeFiles/rebuild_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/test/CMakeFiles/crutch_test.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/test/CMakeFiles/edit_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/test/CMakeFiles/rebuild_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/third_party/CMakeFiles/edit_cache.dir
+C:/Workspace/crutch/cmake-build-debug-visual-studio/third_party/CMakeFiles/rebuild_cache.dir

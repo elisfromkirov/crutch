@@ -11,7 +11,7 @@
 
 namespace crutch {
 
-template <typename Type, AllocatorFor<Type> Allocator = NewAllocator<Type>>
+template <typename Type, AllocatorFor<Type> Allocator>
 class List {
  public:
 

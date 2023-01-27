@@ -15,4 +15,4 @@
   CONCAT_EXPANDED(x, y)
 
 #define HERE() \
-  crutch::SourceLocation{__FILE__, __LINE__, __PRETTY_FUNCTION__}
+  crutch::SourceLocation{__FILE__, __LINE__, __func__}

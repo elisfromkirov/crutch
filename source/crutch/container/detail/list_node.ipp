@@ -8,7 +8,7 @@ namespace detail {
 
 template <typename Type>
 template <typename... ArgTypes>
-requires ConstructibleFrom<Type, ArgTypes...>
+requires Constructible<Type, ArgTypes...>
 ListNode<Type>::ListNode(ListNode* next, ListNode* prev, ArgTypes&&... args)
     : next_{next},
       prev_{prev},
