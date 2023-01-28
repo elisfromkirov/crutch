@@ -34,6 +34,8 @@ container members order
   > iterators
     > begin()/end()
     > const_begin()/const_end()
+    > reverse_begin()/reverse_end()
+    > reverse_const_begin()/reverse_const_end()
   > element accessors
     > operator[]
     > at()

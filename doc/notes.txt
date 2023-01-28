@@ -144,3 +144,27 @@ class Array : protected ArrayBase<Type> {};
 libraries in alphabet order
 files inside library also in alphabet order
 detail is last includes
+
+
+
+// container behaviour
+//
+// default constructor
+//   > initialize allocator by get_default_memory_resource
+//
+// copy constructor
+//   > initialize allocator by pointer to memory resource given by other allocator
+//   > copy
+//
+// copy assignment
+//   > copy and swap
+//
+// move constructor
+//   > initialize allocator by pointer to memory resource given by other allocator and transorm other allocator to invalid state
+//   > move
+//
+// move assignment
+//   > if allocators are equal (i.e. allocators point to the same memory resource)
+//     > move and swap
+//   > else
+//     > copy and swap
