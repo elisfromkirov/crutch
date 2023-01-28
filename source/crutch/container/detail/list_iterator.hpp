@@ -1,27 +1,40 @@
 #pragma once
 
-#include <memory>
-
-#include <crutch/container/detail/list.hpp>
+#include <crutch/container/detail/list_node.hpp>
 
 namespace crutch {
 
 namespace detail {
 
-template <typename Type>
+template <typename Type, typename Allocator>
 class ListIterator {
- public:
+ private:
+  using ListNodePointer = typename ListNode<Type, Allocator>::ListNodePointer;
 
+ public:
+  explicit ListIterator(ListNodePointer node) noexcept;
+
+  bool operator==(const ListIterator& other) const noexcept;
+
+  bool operator!=(const ListIterator& other) const noexcept;
+
+  ListIterator& operator++() noexcept;
+
+  const ListIterator operator++(int) noexcept;
+
+  ListIterator& operator--() noexcept;
+
+  const ListIterator operator--(int) noexcept;
+
+  Type& operator*() const noexcept;
+
+  Type* operator->() const noexcept;
 
  private:
-  ListNode<Type>* node_;
+  ListNodePointer node_;
 };
 
 }  // namespace crutch
-
-
-// const iterator returns const reference
-// const iterator returns const pointer
 
 }  // namespace crutch
 

@@ -1,15 +1,14 @@
 # CLion cache directory
-.idea
+.idea/
 
 # VSCode cache directory
-.vscode
+.vscode/
 
 # CLion CMake build directory
-cmake-build-debug
-cmake-build-release
+cmake-build-*/
 
 # VSCode CMake build directory
-build
+build/
 
 # MacOS specific files
 .DS_Store

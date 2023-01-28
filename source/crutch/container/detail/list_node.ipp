@@ -6,47 +6,48 @@ namespace crutch {
 
 namespace detail {
 
-template <typename Type>
+template <typename Type, typename Allocator>
 template <typename... ArgTypes>
-requires Constructible<Type, ArgTypes...>
-ListNode<Type>::ListNode(ListNode* next, ListNode* prev, ArgTypes&&... args)
+ListNode<Type, Allocator>::ListNode(ListNodePointer next, ListNodePointer prev, ArgTypes&&... args)
     : next_{next},
       prev_{prev},
       value_{::std::forward<ArgTypes>(args)...} {
 }
 
-template <typename Type>
-ListNode<Type>* ListNode<Type>::Next() noexcept {
+template <typename Type, typename Allocator>
+typename ListNode<Type, Allocator>::ListNodePointer ListNode<Type, Allocator>::Next() noexcept {
   return next_;
 }
 
-template <typename Type>
-const ListNode<Type>* ListNode<Type>::Next() const noexcept {
+template <typename Type, typename Allocator>
+typename ListNode<Type, Allocator>::ListNodeConstPointer ListNode<Type, Allocator>::Next()
+    const noexcept {
   return next_;
 }
 
-template <typename Type>
-ListNode<Type>* ListNode<Type>::Prev() noexcept {
+template <typename Type, typename Allocator>
+typename ListNode<Type, Allocator>::ListNodePointer ListNode<Type, Allocator>::Prev() noexcept {
   return prev_;
 }
 
-template <typename Type>
-const ListNode<Type>* ListNode<Type>::Prev() const noexcept {
+template <typename Type, typename Allocator>
+typename ListNode<Type, Allocator>::ListNodeConstPointer ListNode<Type, Allocator>::Prev()
+    const noexcept {
   return prev_;
 }
 
-template <typename Type>
-Type& ListNode<Type>::Value() noexcept {
+template <typename Type, typename Allocator>
+Type& ListNode<Type, Allocator>::Value() noexcept {
   return value_;
 }
 
-template <typename Type>
-const Type& ListNode<Type>::Value() const noexcept {
+template <typename Type, typename Allocator>
+const Type& ListNode<Type, Allocator>::Value() const noexcept {
   return value_;
 }
 
-template <typename Type>
-void ListNode<Type>::LinkAfter(ListNode* node) noexcept {
+template <typename Type, typename Allocator>
+void ListNode<Type, Allocator>::LinkAfter(ListNodePointer node) noexcept {
   ASSERT(node != nullptr, "node must be a valid pointer");
 
   if (next_ != nullptr) {
@@ -57,8 +58,8 @@ void ListNode<Type>::LinkAfter(ListNode* node) noexcept {
   node->prev_ = this;
 }
 
-template <typename Type>
-void ListNode<Type>::LinkBefore(ListNode* node) noexcept {
+template <typename Type, typename Allocator>
+void ListNode<Type, Allocator>::LinkBefore(ListNodePointer node) noexcept {
   ASSERT(node != nullptr, "node must be a valid pointer");
 
   if (prev_ != nullptr) {
@@ -69,8 +70,8 @@ void ListNode<Type>::LinkBefore(ListNode* node) noexcept {
   node->next_ = this;
 }
 
-template <typename Type>
-void ListNode<Type>::Unlink() noexcept {
+template <typename Type, typename Allocator>
+void ListNode<Type, Allocator>::Unlink() noexcept {
   if (next_ != nullptr) {
     next_->prev_ = prev_;
   }

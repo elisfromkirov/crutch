@@ -22,16 +22,4 @@ void Allocator<Type>::Deallocate(Pointer pointer, SizeType amount) noexcept {
   delete[] reinterpret_cast<Uint8*>(pointer);
 }
 
-template <typename Type>
-template <typename... ArgTypes>
-requires Constructible<Type, ArgTypes...>
-void Allocator<Type>::ConstructAt(Pointer pointer, ArgTypes&&... args) {
-  new (pointer) Type(::std::forward<ArgTypes>(args)...);
-}
-
-template <typename Type>
-void Allocator<Type>::DestroyAt(Pointer pointer) noexcept {
-  pointer->~Type();
-}
-
 }  // namespace crutch

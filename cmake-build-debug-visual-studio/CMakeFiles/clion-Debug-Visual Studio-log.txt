@@ -1,5 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2022.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3/bin/ninja/win/ninja.exe" -G Ninja -S C:\Workspace\crutch -B C:\Workspace\crutch\cmake-build-debug-visual-studio
-C:/Workspace/crutch/test/container/list/stress/main.cppC:/Workspace/crutch/test/container/list/unit/main.cppC:/Workspace/crutch/test/factorial/factorial.cppC:/Workspace/crutch/test/main.cpp
--- Configuring done
--- Generating done
--- Build files have been written to: C:/Workspace/crutch/cmake-build-debug-visual-studio

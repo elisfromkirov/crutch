@@ -14,4 +14,6 @@ concept PointerFor = TrivialPointerFor<Pointer, Type> ||
       { pointer.operator->() } noexcept -> ::std::convertible_to<Type*>;
     };
 
+// еще же нужно равенство и неравенство ...
+
 }  // namespace crutch

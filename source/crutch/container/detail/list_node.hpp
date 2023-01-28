@@ -1,5 +1,6 @@
 #pragma once
 
+#include <crutch/concept/allocator_for.hpp>
 #include <crutch/concept/constructible.hpp>
 
 #include <crutch/core/assert.hpp>
@@ -8,24 +9,26 @@ namespace crutch {
 
 namespace detail {
 
-template <typename Type>
+template <typename Type, typename Allocator>
 class ListNode {
+  using ListNodePointer = typename Allocator::Pointer;
+  using ListNodeConstPointer = typename Allocator::ConstPointer;
+
  public:
   template <typename... ArgTypes>
-  requires Constructible<Type, ArgTypes...>
-  explicit ListNode(ListNode* next, ListNode* prev, ArgTypes&&... args);
+  explicit ListNode(ListNodePointer next, ListNodePointer prev, ArgTypes&&... args);
 
   [[nodiscard]]
-  ListNode* Next() noexcept;
+  ListNodePointer Next() noexcept;
 
   [[nodiscard]]
-  const ListNode* Next() const noexcept;
+  ListNodeConstPointer Next() const noexcept;
 
   [[nodiscard]]
-  ListNode* Prev() noexcept;
+  ListNodePointer Prev() noexcept;
 
   [[nodiscard]]
-  const ListNode* Prev() const noexcept;
+  ListNodeConstPointer Prev() const noexcept;
 
   [[nodiscard]]
   Type& Value() noexcept;
@@ -33,15 +36,15 @@ class ListNode {
   [[nodiscard]]
   const Type& Value() const noexcept;
 
-  void LinkAfter(ListNode* node) noexcept;
+  void LinkAfter(ListNodePointer node) noexcept;
 
-  void LinkBefore(ListNode* node) noexcept;
+  void LinkBefore(ListNodePointer node) noexcept;
 
   void Unlink() noexcept;
 
  private:
-  ListNode* next_;
-  ListNode* prev_;
+  ListNodePointer next_;
+  ListNodePointer prev_;
   Type value_;
 };
 

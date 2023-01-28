@@ -9,10 +9,10 @@ namespace crutch {
 template <typename Allocator, typename Type>
 concept AllocatorFor = requires(Allocator allocator, Type* pointer, SizeType amount) {
   typename Allocator::Pointer;
-  requires PointerFor<Allocator::Pointer, Type>;
+  requires PointerFor<typename Allocator::Pointer, Type>;
 
   typename Allocator::ConstPointer;
-  requires PointerFor<Allocator::ConstPointer, const Type>;
+  requires PointerFor<typename Allocator::ConstPointer, const Type>;
 
   { allocator.Allocate(amount) } noexcept -> std::convertible_to<Type*>;
 

@@ -16,7 +16,7 @@ template <typename Type, AllocatorFor<ListNode<Type>> Allocator>
 ListBase<Type, Allocator>::ListBase(const ListBase& other) requires CopyConstructible<Type>
     : head_{nullptr},
       tail_{nullptr} {
-  ///
+  
 }
 
 template <typename Type, AllocatorFor<ListNode<Type>> Allocator>

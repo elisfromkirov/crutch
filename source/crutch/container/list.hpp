@@ -6,6 +6,7 @@
 #include <crutch/concept/is_not_reference.hpp>
 
 #include <crutch/container/detail/list_base.hpp>
+#include <crutch/container/detail/list_const_iterator.hpp>
 #include <crutch/container/detail/list_iterator.hpp>
 #include <crutch/container/detail/list_node.hpp>
 
