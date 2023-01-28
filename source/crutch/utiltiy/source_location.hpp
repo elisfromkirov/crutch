@@ -1,7 +1,7 @@
 #pragma once
 
 #include <crutch/core/assert.hpp>
-#include <crutch/core/types.hpp>
+#include <crutch/core/type.hpp>
 
 #include <crutch/string/view.hpp>
 

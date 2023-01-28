@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
 
 namespace crutch {
@@ -20,6 +21,10 @@ using Uint32 = ::std::uint32_t;
 
 using Uint64 = ::std::uint64_t;
 
+using Byte = ::std::uint8_t;
+
 using SizeType = ::std::uint64_t;
+
+constexpr SizeType MaxAlignment = alignof(std::max_align_t);
 
 }  // namespace crutch

@@ -1,29 +1,18 @@
 #pragma once
 
-#include <crutch/core/assert.hpp>
-#include <crutch/core/types.hpp>
+#include <crutch/core/core.hpp>
 
-#include <crutch/concept/constructible.hpp>
-
-#include <new>
+#include <crutch/memory/allocator.hpp>
 
 namespace crutch {
 
-template <typename Type>
-class Allocator {
+class Allocator : public IAllocator {
  public:
-  using Pointer = Type*;
-  using ConstPointer = const Type*;
+  Byte* Allocate(SizeType bytes, SizeType alignment) override;
 
- public:
-  [[nodiscard]]
-  Pointer Allocate(SizeType amount) noexcept;
+  void Deallocate(Byte* pointer, SizeType bytes, SizeType alignment) noexcept override;
 
-  void Deallocate(Pointer pointer, SizeType amount) noexcept;
+  bool IsEqual(const IAllocator* other) const noexcept override;
 };
 
 }  // namespace crutch
-
-#define ALLOCATOR_IMPL
-#include <crutch/allocator/allocator.ipp>
-#undef ALLOCATOR_IMPL
