@@ -45,12 +45,10 @@ crutch/
             view.ipp
         vector/
             detail/
+                buffer.hpp
+                buffer.ipp
                 vector_base.hpp
                 vector_base.ipp
-            vector_const_iterator.hpp
-            vector_const_iterator.ipp
-            vector_iterator.hpp
-            vector_iterator.ipp
             vector.hpp
             vector.ipp
     memory/
@@ -88,6 +86,10 @@ crutch/
             source_location.hpp
     test/
         core/
+            framework.hpp
+            support.cpp
+            support.hpp
+        impl/
             assertion_failure.hpp
             assertion_failure.cpp
             test.hpp
@@ -100,8 +102,6 @@ crutch/
             test_suite.hpp
             test_suite_registrar.cpp
             test_suite_registrar.hpp
-        framework/
-            framework.hpp
         reporter/
             console_reporter.hpp
             console_reporter.cpp

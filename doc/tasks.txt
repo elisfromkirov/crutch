@@ -1,7 +1,0 @@
-allocator
-list
-unique_ptr
-vector
-test refactor
-list tests
-vector tests
