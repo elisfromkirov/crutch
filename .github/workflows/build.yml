@@ -12,11 +12,13 @@ jobs:
 
     strategy:
       matrix:
-        cxx: [g++-11, clang++-14]
+        cxx: [g++-11, clang++-13, clang++-14]
 
         include:
           - cxx: g++-11
             install: sudo apt-get install -y g++-11
+          - cxx: clang++-13
+            install: sudo apt-get install -y clang++-13
           - cxx: clang++-14
             install: sudo apt-get install -y clang++-14
 
