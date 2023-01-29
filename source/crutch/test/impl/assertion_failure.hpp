@@ -1,8 +1,8 @@
 #pragma once
 
-#include <crutch/string/view.hpp>
+#include <crutch/container/string/view.hpp>
 
-#include <crutch/utiltiy/source_location.hpp>
+#include <crutch/core/utility/source_location.hpp>
 
 namespace crutch {
 

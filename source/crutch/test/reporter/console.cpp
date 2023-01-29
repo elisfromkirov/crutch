@@ -1,14 +1,15 @@
-#include <crutch/test/assertion_failure.hpp>
-#include <crutch/test/console_reporter.hpp>
-#include <crutch/test/test.hpp>
-#include <crutch/test/test_suite.hpp>
+#include <crutch/test/impl/assertion_failure.hpp>
+#include <crutch/test/impl/test.hpp>
+#include <crutch/test/impl/test_suite.hpp>
+
+#include <crutch/test/reporter/console.hpp>
 
 #include <iostream>
 
 namespace crutch {
 
 void ConsoleReporter::TestSuiteStarted(const TestSuite& test_suite) noexcept {
-  std::cout << "[----------] Running " << test_suite.NumberOfTests() << " tests from suite "
+  std::cout << "[----------] Running " << test_suite.NumTests() << " tests from suite "
             << test_suite.Name().Data() << std::endl;
 }
 
@@ -30,7 +31,7 @@ void ConsoleReporter::AssertionFailureOccurred(const ITest& test,
   std::cout << "[     FAIL ] " << test.Name().Data() << " because assertion failure occurred"
             << std::endl;
   std::cout << "[     NOTE ] Assertion failure: " << assertion_failure.Expression().Data() << " in "
-            << assertion_failure.Location().File().Data() << ":"
+            << assertion_failure.Location().File() << ":"
             << assertion_failure.Location().Line() << std::endl;
 }
 

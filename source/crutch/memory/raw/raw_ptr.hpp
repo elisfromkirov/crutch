@@ -1,10 +1,10 @@
 #pragma once
 
-#include "crutch/core/core.hpp"
+#include <crutch/core/type/size.hpp>
 
-#include "crutch/allocator/core/allocator.hpp"
+#include <crutch/allocator/core/allocator.hpp>
 
-#include "crutch/memory/raw/detail/raw_ptr_base.hpp"
+#include <crutch/memory/raw/detail/raw_ptr_base.hpp>
 
 namespace crutch {
 

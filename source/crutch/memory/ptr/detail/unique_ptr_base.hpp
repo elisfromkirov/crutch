@@ -1,14 +1,14 @@
 #pragma once
 
-#include "crutch/core/concept/deleter_for.hpp"
-#include "crutch/concept/is_not_reference.hpp"
+#include <crutch/core/concept/deleter_for.hpp>
+
+#include <utility>
 
 namespace crutch {
 
 namespace detail {
 
-template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Deleter, Type>
+template <typename Type, DeleterFor<Type> Deleter>
 class UniquePtrBase {
  public:
   explicit UniquePtrBase(Type* pointer) noexcept;
@@ -33,5 +33,5 @@ class UniquePtrBase {
 }  // namespace crutch
 
 #define UNIQUE_PTR_BASE_IMPL
-#include "unique_ptr_base.ipp"
+#include <crutch/memory/ptr/detail/unique_ptr_base.ipp>
 #undef UNIQUE_PTR_BASE_IMPL

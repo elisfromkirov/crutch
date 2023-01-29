@@ -1,5 +1,5 @@
-#include <crutch/test/assertion_failure.hpp>
-#include <crutch/test/test_suite.hpp>
+#include <crutch/test/impl/assertion_failure.hpp>
+#include <crutch/test/impl/test_suite.hpp>
 
 namespace crutch {
 
@@ -11,7 +11,7 @@ StringView TestSuite::Name() const noexcept {
   return name_;
 }
 
-SizeType TestSuite::NumberOfTests() const noexcept {
+SizeType TestSuite::NumTests() const noexcept {
   return tests_.size();
 }
 

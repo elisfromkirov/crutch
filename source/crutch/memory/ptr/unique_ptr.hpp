@@ -1,10 +1,9 @@
 #pragma once
 
-#include "crutch/core/concept/deleter_for.hpp"
-#include "crutch/concept/is_not_reference.hpp"
+#include <crutch/core/concept/deleter_for.hpp>
 
-#include "crutch/memory/detail/default_deleter.hpp"
-#include "crutch/memory/detail/unique_ptr_base.hpp"
+#include <crutch/memory/ptr/detail/default_deleter.hpp>
+#include <crutch/memory/ptr/detail/unique_ptr_base.hpp>
 
 namespace crutch {
 
@@ -23,5 +22,5 @@ class UniquePtr final : private detail::UniquePtrBase<Type, Deleter> {
 }  // namespace crutch
 
 #define UNIQUE_PTR_IMPL
-#include "unique_ptr.ipp"
+#include <crutch/memory/ptr/unique_ptr.ipp>
 #undef UNIQUE_PTR_IMPL

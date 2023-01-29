@@ -1,4 +1,4 @@
-#include <crutch/core/utiltiy/source_location.hpp>
+#include <crutch/core/utility/source_location.hpp>
 
 namespace crutch {
 

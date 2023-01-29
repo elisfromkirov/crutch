@@ -1,18 +1,38 @@
-#include <crutch/allocator/core/address.hpp>
-#include <crutch/allocator/core/placement.hpp>
+#include <crutch/test/core/framework.hpp>
 
-#include <crutch/container/list/detail/list_base.hpp>
-#include <crutch/container/list/detail/list_node.hpp>
-#include <crutch/container/list/list_const_iterator.hpp>
-#include <crutch/container/list/list_iterator.hpp>
-#include <crutch/container/list/list.hpp>
+int Factorial(int number) {
+  if (number < 0) {
+    return 0;
+  }
 
-#include <crutch/container/vector/vector.hpp>
+  if (number == 0) {
+    return 0;
+  }
 
-#include <crutch/container/string/view.hpp>
-
-#include <crutch/core/type_traits/char_traits.hpp>
-
-int main() {
-  return 0;
+  int factorial = 1;
+  while (number != 0) {
+    factorial *= number;
+    --number;
+  }
+  return factorial;
 }
+
+TEST_SUITE(Factorial) {
+  TEST(Zero) {
+    int number = 0;
+
+    int factorial = Factorial(number);
+
+    ASSERT_EQ(factorial, 1);
+  }
+
+  TEST(One) {
+    int number = 1;
+
+    int factorial = Factorial(number);
+
+    ASSERT_EQ(factorial, 1);
+  }
+}
+
+RUN_ALL_TESTS()

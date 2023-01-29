@@ -15,5 +15,5 @@ struct DefaultDeleter {
 }  // namespace crutch
 
 #define DEFAULT_DELETER_IMPL
-#include "default_deleter.ipp"
+#include <crutch/memory/ptr/detail/default_deleter.ipp>
 #undef DEFAULT_DELETER_IMPL

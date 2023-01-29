@@ -4,26 +4,22 @@
 
 namespace crutch {
 
-template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Deleter, Type>
+template <typename Type, DeleterFor<Type> Deleter>
 UniquePtr<Type, Deleter>::UniquePtr(Type* pointer) noexcept
     : detail::UniquePtrBase<Type, Deleter>{pointer} {
 }
 
-template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Deleter, Type>
+template <typename Type, DeleterFor<Type> Deleter>
 Type* UniquePtr<Type, Deleter>::Get() const noexcept {
   return this->pointer_;
 }
 
-template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Deleter, Type>
+template <typename Type, DeleterFor<Type> Deleter>
 Type& UniquePtr<Type, Deleter>::operator*() const noexcept {
   return *(this->pointer_);
 }
 
-template <typename Type, typename Deleter>
-requires IsNotReference<Type> && DeleterFor<Deleter, Type>
+template <typename Type, DeleterFor<Type> Deleter>
 Type* UniquePtr<Type, Deleter>::operator->() const noexcept {
   return this->pointer_;
 }

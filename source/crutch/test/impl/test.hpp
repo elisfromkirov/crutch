@@ -1,6 +1,6 @@
 #pragma once
 
-#include <crutch/string/view.hpp>
+#include <crutch/container/string/view.hpp>
 
 namespace crutch {
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "crutch/memory/ptr/unique_ptr.hpp"
+#include <crutch/memory/ptr/unique_ptr.hpp>
 
-#include <crutch/test/test_reporter.hpp>
-#include <crutch/test/test.hpp>
+#include <crutch/test/impl/test.hpp>
+#include <crutch/test/impl/test_reporter.hpp>
 
 #include <vector>
 
@@ -17,7 +17,7 @@ class TestSuite {
   StringView Name() const noexcept;
 
   [[nodiscard]]
-  SizeType NumberOfTests() const noexcept;
+  SizeType NumTests() const noexcept;
 
   void RegisterTest(ITest* test) noexcept;
 
