@@ -16,9 +16,9 @@ jobs:
 
         include:
           - cxx: g++-11
-            install: sudo apt install -y g++-11
+            install: sudo apt-get install -y g++-11
           - cxx: clang++-14
-            install: sudo apt install -y clang++-14
+            install: sudo apt-get install -y clang++-14
 
     steps:
       - uses: actions/checkout@v3
