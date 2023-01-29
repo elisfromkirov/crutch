@@ -16,15 +16,15 @@ jobs:
         run: sudo apt install -y g++-11
 
       - name: make build directory
-        run: mkdir ${{github.workspace}}/build && cd ${{github.workspace}}/build
+        run: mkdir ${{github.workspace}}/build
 
       - name: configure cmake
         env:
           CXX: g++-11
-        run: cmake ..
+        run: cmake -B ${{github.workspace}}/build
 
       - name: build
-        run: cmake --build .
+        run: cmake --build ${{github.workspace}}/build
 
       - name: run tests
-        run: ./test/crutch_test
+        run: build/test/crutch_test
