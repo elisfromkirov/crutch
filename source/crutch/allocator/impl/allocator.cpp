@@ -1,5 +1,7 @@
 #include <crutch/allocator/impl/allocator.hpp>
 
+#include <new>
+
 namespace crutch {
 
 Byte* Allocator::Allocate(SizeType bytes, SizeType alignment) {
@@ -7,7 +9,7 @@ Byte* Allocator::Allocate(SizeType bytes, SizeType alignment) {
   ASSERT(alignment != 0, "alignment must be greater than zero");
 
   Byte* pointer = static_cast<Byte*>(
-      ::operator new(bytes, static_cast<::std::align_val_t>(alignment), ::std::nothrow));
+      ::operator new(bytes, ::std::align_val_t(alignment), ::std::nothrow));
   ASSERT(pointer != nullptr, "operator new error");
 
   return pointer;
@@ -18,7 +20,7 @@ void Allocator::Deallocate(Byte* pointer, SizeType bytes, SizeType alignment) no
   ASSERT(bytes != 0, "number of bytes to deallocate must be greater than zero");
   ASSERT(alignment != 0, "alignment must be greater than zero");
 
-  operator delete(pointer, bytes, static_cast<std::align_val_t>(alignment));
+  ::operator delete(pointer, std::align_val_t(alignment));
 }
 
 bool Allocator::IsEqual(const IAllocator* other) const noexcept {

@@ -1,4 +1,4 @@
-name: build
+name: Build
 
 on:
   push:
@@ -9,22 +9,33 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        cxx: [g++-11, clang++-14]
+
+        include:
+          - cxx: g++-11
+            install: sudo apt install -y g++-11
+          - cxx: clang++-14
+            install: sudo apt install -y clang++-14
+
     steps:
       - uses: actions/checkout@v3
 
-      - name: install toolchain
-        run: sudo apt install -y g++-11
+      - name: Install toolchain
+        run: ${{matrix.install}}
 
-      - name: make build directory
+      - name: Make build directory
         run: mkdir ${{github.workspace}}/build
 
-      - name: configure cmake
+      - name: Configure cmake
         env:
-          CXX: g++-11
+          CXX: ${{matrix.cxx}}
         run: cmake -B ${{github.workspace}}/build
 
-      - name: build
+      - name: Build
         run: cmake --build ${{github.workspace}}/build
 
-      - name: run tests
+      - name: Test
         run: build/test/crutch_test

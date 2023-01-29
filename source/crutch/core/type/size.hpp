@@ -23,6 +23,6 @@ using Uint64 = ::std::uint64_t;
 
 using Byte = ::std::uint8_t;
 
-using SizeType = ::std::uint64_t;
+using SizeType = ::std::size_t;
 
 }  // namespace crutch
