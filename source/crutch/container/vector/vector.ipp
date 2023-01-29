@@ -10,28 +10,28 @@ Vector<Type>::Vector(IAllocator* allocator)
 }
 
 template <typename Type>
-Iterator Vector<Type>::Begin() noexcept {
+typename Vector<Type>::Iterator Vector<Type>::Begin() noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   return this->data_;
 }
 
 template <typename Type>
-Iterator Vector<Type>::End() noexcept {
+typename Vector<Type>::Iterator Vector<Type>::End() noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   return this->data_ + this->size_;
 }
 
 template <typename Type>
-ConstIterator Vector<Type>::ConstBegin() const noexcept {
+typename Vector<Type>::ConstIterator Vector<Type>::ConstBegin() const noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   return this->data_;
 }
 
 template <typename Type>
-ConstIterator Vector<Type>::ConstEnd() const noexcept {
+typename Vector<Type>::ConstIterator Vector<Type>::ConstEnd() const noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   return this->data_ + this->size_;
@@ -121,13 +121,25 @@ SizeType Vector<Type>::Capacity() const noexcept {
 }
 
 template <typename Type>
-void Vector<Type>::Reserve(SizeType capacity) {
+void Vector<Type>::Reserve(SizeType capacity) requires CopyConstructible<Type> && (!MoveConstructible<Type>) {
   ASSERT(this->data_ == nullptr, "vector is invalid");
+  ASSERT(this->capacity_ < capacity, "capacity must be greater than current vector's capacity");
 
-  detail::VectorBase<Type> temp{capacity};
-  temp->MoveToEnd(::std::move(*this));
+  detail::VectorBase<Type> temp{this->allocator_, capacity};
+  temp.CopyToEnd(*this);
   this->Swap(temp);
 }
+
+template <typename Type>
+void Vector<Type>::Reserve(SizeType capacity) requires MoveConstructible<Type> {
+  ASSERT(this->data_ == nullptr, "vector is invalid");
+  ASSERT(this->capacity_ < capacity, "capacity must be greater than current vector's capacity");
+
+  detail::VectorBase<Type> temp{this->allocator_, capacity};
+  temp.MoveToEnd(::std::move(*this));
+  this->Swap(temp);
+}
+
 
 template <typename Type>
 void Vector<Type>::PushBack(const Type& value) requires CopyConstructible<Type> {
@@ -137,7 +149,7 @@ void Vector<Type>::PushBack(const Type& value) requires CopyConstructible<Type> 
 }
 
 template <typename Type>
-void Vector<Type>::PushBack(Type&& value) noexcept requires MoveConstructible<Type> {
+void Vector<Type>::PushBack(Type&& value) requires MoveConstructible<Type> {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   EmplaceBack(::std::move(value));

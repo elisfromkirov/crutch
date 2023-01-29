@@ -8,7 +8,8 @@ namespace detail {
 
 template <typename Type>
 VectorBase<Type>::VectorBase(IAllocator* allocator, SizeType capacity)
-    : Buffer<Type>{reinterpret_cast<Type*>(allocator->Allocate(capacity)), 0, capacity},
+    : Buffer<Type>{reinterpret_cast<Type*>(
+                       allocator->Allocate(capacity * sizeof(Type), kMaxAlignment)), 0, capacity},
       allocator_{allocator} {
 }
 
@@ -45,7 +46,7 @@ VectorBase<Type>& VectorBase<Type>::operator=(VectorBase&& other) {
     return *this;
   }
 
-  if (allocator_.IsEqual(other.allocator_)) {
+  if (allocator_->IsEqual(other.allocator_)) {
     VectorBase<Type> temp{::std::move(other)};
     Swap(other);
     return *this;
@@ -59,7 +60,7 @@ VectorBase<Type>& VectorBase<Type>::operator=(VectorBase&& other) {
 template <typename Type>
 VectorBase<Type>::~VectorBase() noexcept {
   this->DestroyAll();
-  allocator_->Deallocate(this->data_, this->capacity_, kMaxAlignment);
+  allocator_->Deallocate(reinterpret_cast<Byte*>(this->data_), this->capacity_, kMaxAlignment);
 }
 
 template <typename Type>

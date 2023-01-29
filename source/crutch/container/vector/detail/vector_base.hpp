@@ -14,7 +14,7 @@ namespace crutch {
 namespace detail {
 
 template <typename Type>
-class VectorBase : protected Buffer<Type> {
+class VectorBase : public Buffer<Type> {
  public:
   VectorBase(IAllocator* allocator, SizeType capacity);
 
@@ -24,7 +24,6 @@ class VectorBase : protected Buffer<Type> {
   VectorBase(VectorBase&& other) noexcept;
   VectorBase& operator=(VectorBase&& other);
 
- protected:
   ~VectorBase() noexcept;
 
  protected:

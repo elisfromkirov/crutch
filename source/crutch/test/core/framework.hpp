@@ -13,10 +13,12 @@
 
 #include <crutch/test/reporter/console.hpp>
 
-#define ASSERT_EXPRESSION(expression)                                \
-  if (!(expression)) {                                               \
-    throw ::crutch::AssertionFailure(TO_STRING(expression), HERE()); \
-  }
+#define ASSERT_EXPRESSION(expression)                                  \
+  do {                                                                 \
+    if (!(expression)) {                                               \
+      throw ::crutch::AssertionFailure(TO_STRING(expression), HERE()); \
+    }                                                                  \
+  } while (false)
 
 #define ASSERT_EQ(x, y) \
   ASSERT_EXPRESSION((x) == (y))
@@ -35,6 +37,12 @@
 
 #define ASSERT_GE(x, y) \
   ASSERT_EXPRESSION((x) >= (y))
+
+#define ASSERT_TRUE(expression) \
+  ASSERT_EXPRESSION((expression))
+
+#define ASSERT_FALSE(expression) \
+  ASSERT_EXPRESSION(!(expression))
 
 #define TEST_SUITE_IMPL(test_suite_namespace, name)                   \
   namespace test_suite_namespace {                                    \
@@ -74,7 +82,7 @@
   TEST_IMPL(CONCAT(TestRoutine, name), CONCAT(Test, name), TO_STRING(name), \
             CONCAT(kTestFactory, name))
 
-#define RUN_ALL_TESTS()                                              \
+#define RUN_ALL_SUITES()                                              \
   int main() {                                                       \
     ::crutch::ConsoleReporter console_reporter{};                    \
     ::crutch::TestEngine::Instance().RunAllSuites(console_reporter); \

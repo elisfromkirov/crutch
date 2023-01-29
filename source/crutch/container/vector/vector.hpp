@@ -15,7 +15,7 @@
 namespace crutch {
 
 template <typename Type>
-class Vector : protected detail::VectorBase<Type> {
+class Vector : private detail::VectorBase<Type> {
  public:
   static constexpr SizeType default_capacity{8};
 
@@ -62,11 +62,13 @@ class Vector : protected detail::VectorBase<Type> {
   [[nodiscard]]
   SizeType Capacity() const noexcept;
 
-  void Reserve(SizeType capacity);
+  void Reserve(SizeType capacity) requires CopyConstructible<Type> && (!MoveConstructible<Type>);
+
+  void Reserve(SizeType capacity) requires MoveConstructible<Type>;
 
   void PushBack(const Type& value) requires CopyConstructible<Type>;
 
-  void PushBack(Type&& value) noexcept requires MoveConstructible<Type>;
+  void PushBack(Type&& value) requires MoveConstructible<Type>;
 
   template <typename... ArgTypes>
   requires Constructible<Type, ArgTypes...>
