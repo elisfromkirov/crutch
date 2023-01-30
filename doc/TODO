@@ -1,0 +1,117 @@
+## current library interface ##
+
+allocator/
+    allocator.cpp
+    allocator.hpp
+    arena.cpp
+    arena.hpp
+array/
+    array.hpp
+    array.ipp
+    array_view.hpp
+    array_view.ipp
+concept/
+    constructible.hpp
+    deleter_for.hpp
+    derived_from.hpp
+core/
+    core.hpp
+error/
+    error.cpp
+    error.hpp
+format/
+    format_traits.hpp
+    format_traits.ipp
+    format.hpp
+function/
+    make_unique_function.hpp
+    make_unique_function.ipp
+    unique_function.hpp
+    unique_function.ipp
+hash/
+    hash_map.hpp
+    hash_map.ipp
+intrusive/
+    intrusive_list.hpp
+    intrusive_list.ipp
+    intrusive_node.hpp
+    intrusive_node.ipp
+list/
+    list.hpp
+    list.ipp
+    list_const_iterator.hpp
+    list_const_iterator.ipp
+    list_iterator.hpp
+    list_iterator.ipp
+log/
+    console_sink.cpp
+    console_sink.hpp
+    log_framework.hpp
+    log_engine.cpp
+    log_engine.hpp
+    log_message.cpp
+    log_message.hpp
+    log_sink.hpp
+macro/
+    concat.hpp
+    here.hpp
+    to_string.hpp
+map/
+    map.hpp
+    map.ipp
+    map_const_iterator.hpp
+    map_const_iterator.ipp
+    map_iterator.hpp
+    map_iterator.ipp
+memory/
+    alignment.hpp
+    allocator.hpp
+    allocate.cpp
+    allocate.hpp
+    placement.hpp
+    placement.ipp
+    raw_ptr.hpp
+    raw_ptr.cpp
+ptr/
+    make_unique_ptr.hpp
+    make_unique_ptr.ipp
+    unique_ptr.hpp
+    unique_ptr.ipp
+reflect/
+    reflect.hpp
+result/
+    make_result.hpp
+    make_result.ipp
+    result.hpp
+    result.ipp
+string/
+    string.cpp
+    string.hpp
+    string_builder.cpp
+    string_builder.hpp
+    string_view.hpp
+    string_view.ipp
+test/
+    assertion_failure.hpp
+    assertion_failure.cpp
+    console_reporter.hpp
+    console_reporter.cpp
+    test.hpp
+    test_engine.cpp
+    test_engine.hpp
+    test_framework.hpp
+    test_factory.hpp
+    test_factory.ipp
+    test_reporter.hpp
+    test_suite.cpp
+    test_suite.hpp
+    test_suite_registrar.cpp
+    test_suite_registrar.hpp
+utility/
+    source_location.cpp
+    source_location.hpp
+vector/
+    vector.hpp
+    vector.ipp
+    vector_view.hpp
+    vector_view.ipp
