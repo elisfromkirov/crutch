@@ -1,0 +1,41 @@
+#include <crutch/test/assertion_failure.hpp>
+#include <crutch/test/test_suite.hpp>
+
+namespace crutch {
+
+TestSuite::TestSuite(const char* name) noexcept
+    : name_{name} {
+}
+
+StringView TestSuite::Name() const noexcept {
+  return name_;
+}
+
+SizeType TestSuite::NumTests() const noexcept {
+  return tests_.Size();
+}
+
+void TestSuite::RegisterTest(UniquePtr<ITest> test) noexcept {
+  tests_.PushBack(::std::move(test));
+}
+
+void TestSuite::RunAllTests(ITestReporter& reporter) noexcept {
+  reporter.TestSuiteStarted(*this);
+  for (SizeType index = 0; index < tests_.Size(); ++index) {
+    auto& test = tests_[index];
+    reporter.TestStarted(*test);
+    try {
+      test->Run();
+      reporter.TestPassed(*test);
+    } catch (const AssertionFailure& assertion_failure) {
+      reporter.AssertionFailureOccurred(*test, assertion_failure);
+    } catch (const std::exception& exception) {
+      reporter.UnhandledExceptionThrown(*test, exception);
+    } catch (...) {
+      reporter.UnhandledUnknownExceptionThrown(*test);
+    }
+  }
+  reporter.TestSuiteFinished(*this);
+}
+
+}  // namespace crutch

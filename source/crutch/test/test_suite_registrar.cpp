@@ -1,0 +1,10 @@
+#include <crutch/test/test_suite_registrar.hpp>
+#include <crutch/test/test_engine.hpp>
+
+namespace crutch {
+
+TestSuiteRegistrar::TestSuiteRegistrar(TestSuite* suite) noexcept {
+  TestEngine::Instance().RegisterSuite(suite);
+}
+
+}  // namespace crutch

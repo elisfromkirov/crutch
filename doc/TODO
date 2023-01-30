@@ -1,4 +1,4 @@
-## current library interface ##
+## current [desired] library interface ##
 
 allocator/
     allocator.cpp
@@ -8,12 +8,13 @@ allocator/
 array/
     array.hpp
     array.ipp
-    array_view.hpp
-    array_view.ipp
 concept/
+    assignable.hpp
     constructible.hpp
     deleter_for.hpp
     derived_from.hpp
+    pointer_for.hpp
+    trivial_pointer_for.hpp
 core/
     core.hpp
 error/
@@ -64,10 +65,19 @@ map/
     map_iterator.hpp
     map_iterator.ipp
 memory/
+    address.hpp
+    address.ipp
+    aligned_raw_ptr.cpp
+    aligned_raw_ptr.hpp
     alignment.hpp
-    allocator.hpp
     allocate.cpp
     allocate.hpp
+    allocate_aligned.cpp
+    allocate_aligned.hpp
+    allocator.cpp
+    allocator.hpp
+    default.cpp
+    default.hpp
     placement.hpp
     placement.ipp
     raw_ptr.hpp
@@ -94,8 +104,12 @@ string/
 test/
     assertion_failure.hpp
     assertion_failure.cpp
-    console_reporter.hpp
     console_reporter.cpp
+    console_reporter.hpp
+    copy_only.cpp
+    copy_only.hpp
+    move_only.cpp
+    move_only.hpp
     test.hpp
     test_engine.cpp
     test_engine.hpp

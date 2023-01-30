@@ -11,5 +11,5 @@ SortIncludes: Never
 PackConstructorInitializers: Never
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: AfterComma
-ColumnLimit: 100
+ColumnLimit: 120
 IndentRequires: false
