@@ -1,10 +1,10 @@
-#include <crutch/vector/vector.hpp>
+#include "crutch/vector/vector.hpp"
 
-#include <crutch/test/test_framework.hpp>
+#include "crutch/test/test_framework.hpp"
 
 #include <random>
 
-TEST_SUITE(Vector) {
+TEST_SUITE(VectorUnit) {
   TEST(Iterator) {
     crutch::Vector<int> vector{};
     const crutch::Vector<int>& ref = vector;

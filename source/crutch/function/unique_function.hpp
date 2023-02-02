@@ -6,6 +6,7 @@
 #include <crutch/core/core.hpp>
 
 #include <crutch/memory/allocator.hpp>
+#include <crutch/memory/default.hpp>
 
 #include <crutch/function/detail/unique_function_base.hpp>
 
@@ -15,12 +16,12 @@ template <typename ReturnValue, typename... Arguments>
 class UniqueFunction;
 
 template <typename ReturnValue, typename... Arguments>
-class UniqueFunction<ReturnValue (Arguments...)> {
+class UniqueFunction<ReturnValue(Arguments...)> final : private detail::UniqueFunctionBase<ReturnValue(Arguments...)> {
  public:
   template <typename Closure>
   requires Copyable<Closure> || Moveable<Closure>
   explicit UniqueFunction(Closure&& closure, IAllocator* allocator = GetDefaultAllocator());
-  
+
   ReturnValue operator()(Arguments&&... arguments);
 };
 
