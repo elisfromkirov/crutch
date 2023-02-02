@@ -36,8 +36,20 @@ using Uint32 = ::std::uint32_t;
 
 using Uint64 = ::std::uint64_t;
 
+}  // namespace crutch
+
+namespace crutch {
+
 using Byte = ::std::uint8_t;
 
 using SizeType = ::std::size_t;
+
+}  // namespace crutch
+
+namespace crutch {
+
+constexpr static SizeType Max(SizeType lhs, SizeType rhs) {
+  return lhs < rhs ? rhs : lhs;
+}
 
 }  // namespace crutch

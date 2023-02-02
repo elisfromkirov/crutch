@@ -22,9 +22,9 @@ class VectorBase {
 
   void Swap(VectorBase& other) noexcept;
 
-  template <typename... ArgTypes>
-  requires Constructible<Type, ArgTypes&&...>
-  void ConstructAtEnd(ArgTypes&&... args);
+  template <typename... Arguments>
+  requires Constructible<Type, Arguments&&...>
+  void ConstructAtEnd(Arguments&&... arguments);
 
   void DestroyAtEnd() noexcept;
 

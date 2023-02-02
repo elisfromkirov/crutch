@@ -173,15 +173,15 @@ void Vector<Type>::PushBack(Type&& value) requires Moveable<Type> {
 }
 
 template <typename Type>
-template <typename... ArgTypes>
-requires Constructible<Type, ArgTypes&&...>
-void Vector<Type>::EmplaceBack(ArgTypes&&... args) {
+template <typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+void Vector<Type>::EmplaceBack(Arguments&&... arguments) {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   if (this->size_ == this->capacity_) {
     Reserve(this->capacity_ * default_growth_factor);
   }
-  this->ConstructAtEnd(::std::forward<ArgTypes>(args)...);
+  this->ConstructAtEnd(::std::forward<Arguments>(arguments)...);
 }
 
 template <typename Type>

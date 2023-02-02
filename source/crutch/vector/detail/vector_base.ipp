@@ -54,13 +54,13 @@ void VectorBase<Type>::Swap(VectorBase& other) noexcept {
 }
 
 template <typename Type>
-template <typename... ArgTypes>
-requires Constructible<Type, ArgTypes&&...>
-void VectorBase<Type>::ConstructAtEnd(ArgTypes&&... args) {
+template <typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+void VectorBase<Type>::ConstructAtEnd(Arguments&&... arguments) {
   ASSERT(data_ == nullptr, "vector is invalid");
   ASSERT(size_ < capacity_, "vector size must be less than capacity");
 
-  ConstructAt(data_ + size_, ::std::forward<ArgTypes>(args)...);
+  ConstructAt(data_ + size_, ::std::forward<Arguments>(arguments)...);
   size_++;
 }
 

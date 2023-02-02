@@ -4,11 +4,11 @@
 
 namespace crutch {
 
-template <typename Type, typename... ArgTypes>
-requires Constructible<Type, ArgTypes&&...>
-UniquePtr<Type> MakeUniquePtr(ArgTypes&&... args) {
+template <typename Type, typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+UniquePtr<Type> MakeUniquePtr(Arguments&&... arguments) {
   auto ptr = Allocate<Type>(GetDefaultAllocator());
-  auto object = Construct(::std::move(ptr), ::std::forward<ArgTypes>(args)...);
+  auto object = Construct(::std::move(ptr), ::std::forward<Arguments>(arguments)...);
   return UniquePtr<Type>{object};
 }
 

@@ -75,9 +75,9 @@ class Vector : private detail::VectorBase<Type> {
 
   void PushBack(Type&& value) requires Moveable<Type>;
 
-  template <typename... ArgTypes>
-  requires Constructible<Type, ArgTypes&&...>
-  void EmplaceBack(ArgTypes&&... args);
+  template <typename... Arguments>
+  requires Constructible<Type, Arguments&&...>
+  void EmplaceBack(Arguments&&... arguments);
 
   void PopBack() noexcept;
 

@@ -8,16 +8,16 @@
 
 namespace crutch {
 
-template <typename Type, typename... ArgTypes>
-requires Constructible<Type, ArgTypes&&...>
-Type* Construct(RawPtr<Type> ptr, ArgTypes&&... args);
+template <typename Type, typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+Type* Construct(RawPtr<Type> ptr, Arguments&&... arguments);
 
 template <typename Type>
 RawPtr<Type> Destroy(Type* object, IAllocator* allocator) noexcept;
 
-template <typename Type, typename... ArgTypes>
-requires Constructible<Type, ArgTypes&&...>
-Type* ConstructAt(Type* ptr, ArgTypes&&... args);
+template <typename Type, typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+Type* ConstructAt(Type* ptr, Arguments&&... arguments);
 
 template <typename Type>
 void DestroyAt(Type* object) noexcept;
