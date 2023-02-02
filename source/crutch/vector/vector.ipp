@@ -5,8 +5,26 @@
 namespace crutch {
 
 template <typename Type>
-Vector<Type>::Vector(IAllocator* allocator)
-    : detail::VectorBase<Type>{allocator, default_capacity} {
+Vector<Type>::Vector(SizeType capacity, IAllocator* allocator)
+    : detail::VectorBase<Type>{capacity, allocator} {
+}
+
+template <typename Type>
+Vector<Type>::Vector(const Vector& other)
+    : detail::VectorBase<Type>{other.capacity_, other.allocator_} {
+  CopyToEnd(other);
+}
+
+template <typename Type>
+Vector<Type>& Vector<Type>::operator=(const Vector& other) {
+  if (this == &other) {
+    return *this;
+  }
+
+  Vector<Type> tmp{other};
+  this->Swap(tmp);
+
+  return *this;
 }
 
 template <typename Type>
@@ -121,35 +139,34 @@ SizeType Vector<Type>::Capacity() const noexcept {
 }
 
 template <typename Type>
-void Vector<Type>::Reserve(SizeType capacity) requires CopyConstructible<Type> && (!MoveConstructible<Type>) {
+void Vector<Type>::Reserve(SizeType capacity) requires Copyable<Type> && (!Moveable<Type>) {
   ASSERT(this->data_ == nullptr, "vector is invalid");
   ASSERT(this->capacity_ < capacity, "capacity must be greater than current vector's capacity");
 
-  detail::VectorBase<Type> temp{this->allocator_, capacity};
-  temp.CopyToEnd(*this);
-  this->Swap(temp);
+  Vector<Type> tmp{capacity, this->allocator_};
+  tmp.CopyToEnd(*this);
+  this->Swap(tmp);
 }
 
 template <typename Type>
-void Vector<Type>::Reserve(SizeType capacity) requires MoveConstructible<Type> {
+void Vector<Type>::Reserve(SizeType capacity) requires Moveable<Type> {
   ASSERT(this->data_ == nullptr, "vector is invalid");
   ASSERT(this->capacity_ < capacity, "capacity must be greater than current vector's capacity");
 
-  detail::VectorBase<Type> temp{this->allocator_, capacity};
-  temp.MoveToEnd(::std::move(*this));
-  this->Swap(temp);
+  Vector<Type> tmp{capacity, this->allocator_};
+  tmp.MoveToEnd(::std::move(*this));
+  this->Swap(tmp);
 }
 
-
 template <typename Type>
-void Vector<Type>::PushBack(const Type& value) requires CopyConstructible<Type> {
+void Vector<Type>::PushBack(const Type& value) requires Copyable<Type> {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   EmplaceBack(value);
 }
 
 template <typename Type>
-void Vector<Type>::PushBack(Type&& value) requires MoveConstructible<Type> {
+void Vector<Type>::PushBack(Type&& value) requires Moveable<Type> {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   EmplaceBack(::std::move(value));
@@ -157,7 +174,8 @@ void Vector<Type>::PushBack(Type&& value) requires MoveConstructible<Type> {
 
 template <typename Type>
 template <typename... ArgTypes>
-void Vector<Type>::EmplaceBack(ArgTypes&&... args) requires Constructible<Type, ArgTypes&&...> {
+requires Constructible<Type, ArgTypes&&...>
+void Vector<Type>::EmplaceBack(ArgTypes&&... args) {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   if (this->size_ == this->capacity_) {
@@ -173,5 +191,24 @@ void Vector<Type>::PopBack() noexcept {
 
   this->DestroyAtEnd();
 }
+
+template <typename Type>
+void Vector<Type>::CopyToEnd(const Vector& other) requires Copyable<Type> {
+  ASSERT(this->data_ == nullptr, "vector is invalid");
+
+  for (SizeType i = 0; i < other.size_; ++i) {
+    this->ConstructAtEnd(other.data_[i]);
+  }
+}
+
+template <typename Type>
+void Vector<Type>::MoveToEnd(Vector&& other) noexcept requires Moveable<Type> {
+  ASSERT(this->data_ == nullptr, "vector is invalid");
+
+  for (SizeType i = 0; i < other.size_; ++i) {
+    this->ConstructAtEnd(::std::move(other.data_[i]));
+  }
+}
+
 
 }  // namespace crutch

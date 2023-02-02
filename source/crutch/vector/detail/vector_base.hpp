@@ -1,34 +1,37 @@
 #pragma once
 
-#include <crutch/concept/constructible.hpp>
-
 #include <crutch/core/core.hpp>
 
 #include <crutch/memory/allocator.hpp>
-
-#include <crutch/vector/detail/buffer.hpp>
+#include <crutch/memory/placement.hpp>
 
 namespace crutch {
 
 namespace detail {
 
 template <typename Type>
-class VectorBase : public Buffer<Type> {
+class VectorBase {
  public:
-  VectorBase(IAllocator* allocator, SizeType capacity);
-
-  VectorBase(const VectorBase& other) requires CopyConstructible<Type>;
-  VectorBase& operator=(const VectorBase& other) requires CopyConstructible<Type>;
+  VectorBase(SizeType capacity, IAllocator* allocator);
 
   VectorBase(VectorBase&& other) noexcept;
-  VectorBase& operator=(VectorBase&& other);
+  VectorBase& operator=(VectorBase&& other) noexcept;
 
+ protected:
   ~VectorBase() noexcept;
 
- protected:
   void Swap(VectorBase& other) noexcept;
 
+  template <typename... ArgTypes>
+  requires Constructible<Type, ArgTypes&&...>
+  void ConstructAtEnd(ArgTypes&&... args);
+
+  void DestroyAtEnd() noexcept;
+
  protected:
+  Type* data_;
+  SizeType size_;
+  SizeType capacity_;
   IAllocator* allocator_;
 };
 

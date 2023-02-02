@@ -10,14 +10,17 @@ namespace crutch {
 
 template <typename Type, typename... ArgTypes>
 requires Constructible<Type, ArgTypes&&...>
-Type* Construct(RawPtr pointer, ArgTypes&&... args);
+Type* Construct(RawPtr<Type> ptr, ArgTypes&&... args);
+
+template <typename Type>
+RawPtr<Type> Destroy(Type* object, IAllocator* allocator) noexcept;
 
 template <typename Type, typename... ArgTypes>
 requires Constructible<Type, ArgTypes&&...>
-void ConstructAt(Type* place, ArgTypes&&... args);
+Type* ConstructAt(Type* ptr, ArgTypes&&... args);
 
 template <typename Type>
-void DestroyAt(Type* place) noexcept;
+void DestroyAt(Type* object) noexcept;
 
 }  // namespace crutch
 

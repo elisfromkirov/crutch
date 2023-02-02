@@ -20,8 +20,7 @@ UniquePtrBase<Type, Deleter>::UniquePtrBase(UniquePtrBase&& other) noexcept
 }
 
 template <typename Type, DeleterFor<Type> Deleter>
-UniquePtrBase<Type, Deleter>& UniquePtrBase<Type, Deleter>::operator=(
-    UniquePtrBase&& other) noexcept {
+UniquePtrBase<Type, Deleter>& UniquePtrBase<Type, Deleter>::operator=(UniquePtrBase&& other) noexcept {
   if (this == &other) {
     return *this;
   }

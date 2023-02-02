@@ -1,6 +1,8 @@
 #pragma once
 
 #include <crutch/concept/constructible.hpp>
+#include <crutch/concept/copyable.hpp>
+#include <crutch/concept/moveable.hpp>
 
 #include <crutch/core/core.hpp>
 
@@ -24,7 +26,13 @@ class Vector : private detail::VectorBase<Type> {
   using ConstIterator = const Type*;
 
  public:
-  explicit Vector(IAllocator* allocator = GetDefaultAllocator());
+  explicit Vector(SizeType capacity = default_capacity, IAllocator* allocator = GetDefaultAllocator());
+
+  Vector(const Vector& other);
+  Vector& operator=(const Vector& other);
+
+  Vector(Vector&& other) noexcept = default;
+  Vector& operator=(Vector&& other) noexcept = default;
 
   Iterator Begin() noexcept;
 
@@ -59,18 +67,24 @@ class Vector : private detail::VectorBase<Type> {
   [[nodiscard]]
   SizeType Capacity() const noexcept;
 
-  void Reserve(SizeType capacity) requires CopyConstructible<Type> && (!MoveConstructible<Type>);
+  void Reserve(SizeType capacity) requires Copyable<Type> && (!Moveable<Type>);
 
-  void Reserve(SizeType capacity) requires MoveConstructible<Type>;
+  void Reserve(SizeType capacity) requires Moveable<Type>;
 
-  void PushBack(const Type& value) requires CopyConstructible<Type>;
+  void PushBack(const Type& value) requires Copyable<Type>;
 
-  void PushBack(Type&& value) requires MoveConstructible<Type>;
+  void PushBack(Type&& value) requires Moveable<Type>;
 
   template <typename... ArgTypes>
-  void EmplaceBack(ArgTypes&&... args) requires Constructible<Type, ArgTypes&&...>;
+  requires Constructible<Type, ArgTypes&&...>
+  void EmplaceBack(ArgTypes&&... args);
 
   void PopBack() noexcept;
+
+ private:
+  void CopyToEnd(const Vector& other) requires Copyable<Type>;
+
+  void MoveToEnd(Vector&& other) noexcept requires Moveable<Type>;
 };
 
 }  // namespace crutch

@@ -12,9 +12,8 @@ DefaultDeleter<Type>::DefaultDeleter(DefaultDeleter<DerivedType>&& other) noexce
 }
 
 template <typename Type>
-void DefaultDeleter<Type>::operator()(Type* pointer) noexcept {
-  DestroyAt(pointer);
-  GetDefaultAllocator()->Deallocate(reinterpret_cast<Byte*>(pointer), sizeof(Type));
+void DefaultDeleter<Type>::operator()(Type* object) noexcept {
+  auto ptr = Destroy(object, GetDefaultAllocator());
 }
 
 }  // namespace detail

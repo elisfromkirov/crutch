@@ -18,13 +18,12 @@ class UniquePtr final : private detail::UniquePtrBase<Type, Deleter> {
   template <typename OtherType, DeleterFor<OtherType> OtherDeleter>
   friend class UniquePtr;
 
-  public:
-  explicit UniquePtr(Type* pointer) requires DefaultConstructible<Deleter>;
-
-  UniquePtr(Type* pointer, Deleter&& deleter) noexcept;
+ public:
+  explicit UniquePtr(Type* pointer, Deleter&& deleter = Deleter()) noexcept;
 
   template <DerivedFrom<Type> OtherType, DeleterFor<OtherType> OtherDeleter>
-  UniquePtr(UniquePtr<OtherType, OtherDeleter>&& other) noexcept requires Constructible<Deleter, OtherDeleter&&>;
+  requires Constructible<Deleter, OtherDeleter&&>
+  UniquePtr(UniquePtr<OtherType, OtherDeleter>&& other) noexcept;
 
   Type& operator*() const noexcept;
 

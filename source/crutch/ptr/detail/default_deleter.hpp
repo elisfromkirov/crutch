@@ -18,7 +18,10 @@ struct DefaultDeleter {
   template <DerivedFrom<Type> DerivedType>
   explicit DefaultDeleter(DefaultDeleter<DerivedType>&& other) noexcept;
 
-  void operator()(Type* pointer) noexcept;
+  DefaultDeleter(DefaultDeleter&& other) noexcept = default;
+  DefaultDeleter& operator=(DefaultDeleter&& other) noexcept = default;
+
+  void operator()(Type* object) noexcept;
 };
 
 }  // namespace detail

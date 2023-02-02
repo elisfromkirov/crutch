@@ -8,9 +8,10 @@ namespace crutch {
 
 namespace detail {
 
+template <typename Type>
 class RawPtrBase {
  public:
-  RawPtrBase(Byte* pointer, IAllocator* allocator, SizeType bytes) noexcept;
+  RawPtrBase(Type* pointer, IAllocator* allocator) noexcept;
 
   RawPtrBase(const RawPtrBase& other) = delete;
   RawPtrBase& operator=(const RawPtrBase& other) = delete;
@@ -21,15 +22,17 @@ class RawPtrBase {
  protected:
   ~RawPtrBase() noexcept;
 
- protected:
   void Swap(RawPtrBase& other) noexcept;
 
  protected:
-  Byte* pointer_;
+  Type* pointer_;
   IAllocator* allocator_;
-  SizeType bytes_;
 };
 
 }  // namespace detail
 
 }  // namespace crutch
+
+#define RAW_PTR_BASE_IMPL
+#include <crutch/memory/detail/raw_ptr_base.ipp>
+#undef RAW_PTR_BASE_IMPL

@@ -8,14 +8,19 @@
 
 namespace crutch {
 
-class RawPtr final : private detail::RawPtrBase {
+template <typename Type>
+class RawPtr final : private detail::RawPtrBase<Type> {
  public:
-  RawPtr(Byte* pointer, IAllocator* allocator, SizeType bytes) noexcept;
+  RawPtr(Type* pointer, IAllocator* allocator) noexcept;
 
   [[nodiscard]]
-  Byte* Get() const noexcept;
+  Type* Get() const noexcept;
 
   void Release() noexcept;
 };
 
 }  // namespace crutch
+
+#define RAW_PTR_IMPL
+#include <crutch/memory/raw_ptr.ipp>
+#undef RAW_PTR_IMPL

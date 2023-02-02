@@ -7,6 +7,11 @@
 
 namespace crutch {
 
-RawPtr Allocate(IAllocator* allocator, SizeType bytes);
+template <typename Type>
+RawPtr<Type> Allocate(IAllocator* allocator);
 
 }  // namespace crutch
+
+#define ALLOCATE_IMPL
+#include <crutch/memory/allocate.ipp>
+#undef ALLOCATE_IMPL
