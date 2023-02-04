@@ -6,6 +6,8 @@ namespace crutch {
 
 class StringView {
  public:
+  StringView() noexcept;
+
   explicit StringView(const char* data) noexcept;
 
   StringView(const char* data, SizeType size) noexcept;

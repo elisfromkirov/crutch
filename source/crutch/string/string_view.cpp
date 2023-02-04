@@ -2,6 +2,11 @@
 
 namespace crutch {
 
+StringView::StringView() noexcept
+    : data_{nullptr},
+      size_{0} {
+}
+
 StringView::StringView(const char* data) noexcept
     : data_{data},
       size_{::std::strlen(data)} {

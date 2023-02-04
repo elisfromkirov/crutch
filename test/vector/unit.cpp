@@ -3,6 +3,7 @@
 #include "crutch/test/test_framework.hpp"
 
 #include <random>
+#include <exception>
 
 TEST_SUITE(VectorUnit) {
   TEST(Iterator) {

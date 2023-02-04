@@ -20,6 +20,7 @@ void TestSuite::RegisterTest(UniquePtr<ITest> test) noexcept {
 }
 
 void TestSuite::RunAllTests(ITestReporter& reporter) noexcept {
+  SizeType num_passed_tests{0};
   reporter.TestSuiteStarted(*this);
   for (SizeType index = 0; index < tests_.Size(); ++index) {
     auto& test = tests_[index];
@@ -27,6 +28,7 @@ void TestSuite::RunAllTests(ITestReporter& reporter) noexcept {
     try {
       test->Run();
       reporter.TestPassed(*test);
+      num_passed_tests++;
     } catch (const AssertionFailure& assertion_failure) {
       reporter.AssertionFailureOccurred(*test, assertion_failure);
     } catch (const std::exception& exception) {
@@ -35,7 +37,7 @@ void TestSuite::RunAllTests(ITestReporter& reporter) noexcept {
       reporter.UnhandledUnknownExceptionThrown(*test);
     }
   }
-  reporter.TestSuiteFinished(*this);
+  reporter.TestSuiteFinished(*this, num_passed_tests);
 }
 
 }  // namespace crutch

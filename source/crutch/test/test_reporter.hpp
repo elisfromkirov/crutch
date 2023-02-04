@@ -18,7 +18,7 @@ class ITestReporter {
 
   virtual void TestSuiteStarted(const TestSuite& test_suite) noexcept = 0;
 
-  virtual void TestSuiteFinished(const TestSuite& test_suite) noexcept = 0;
+  virtual void TestSuiteFinished(const TestSuite& test_suite, SizeType num_passed_tests) noexcept = 0;
 
   virtual void TestStarted(const ITest& test) noexcept = 0;
 
