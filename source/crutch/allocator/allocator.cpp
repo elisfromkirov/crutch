@@ -6,15 +6,17 @@ void* Allocator::Allocate(SizeType bytes, SizeType alignment) {
   ASSERT(bytes != 0, "number of bytes to allocate must be greater than zero");
   ASSERT(alignment != 0, "alignment must be greater than zero");
 
-  return ::operator new(bytes, ::std::align_val_t(alignment));
+  auto ptr = ::operator new(bytes, ::std::align_val_t(alignment));
+  ::std::memset(ptr, 0, bytes);
+  return ptr;
 }
 
-void Allocator::Deallocate(void* pointer, SizeType bytes, SizeType alignment) noexcept {
+void Allocator::Deallocate(void* ptr, SizeType bytes, SizeType alignment) noexcept {
   ASSERT(bytes != 0, "number of bytes to deallocate must be greater than zero");
   ASSERT(alignment != 0, "alignment must be greater than zero");
 
-  if (pointer != nullptr) {
-    ::operator delete(pointer, std::align_val_t(alignment));
+  if (ptr != nullptr) {
+    ::operator delete(ptr, ::std::align_val_t(alignment));
   }
 }
 

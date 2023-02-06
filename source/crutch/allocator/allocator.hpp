@@ -11,7 +11,7 @@ namespace crutch {
 class Allocator : public IAllocator {
   void* Allocate(SizeType bytes, SizeType alignment) override;
 
-  void Deallocate(void* pointer, SizeType bytes, SizeType alignment) noexcept override;
+  void Deallocate(void* ptr, SizeType bytes, SizeType alignment) noexcept override;
 
   bool IsEqual(const IAllocator* other) const noexcept override;
 };

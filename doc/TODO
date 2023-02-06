@@ -138,3 +138,10 @@ UniquePtr deletion is a lightweight copyable policy.
 
 Comparison policy is described by pure static template parameter Comparator
 Hash function and quality checker are described similary.
+
+
+ensure something
+
+assure someone
+
+add class invariant checkers
