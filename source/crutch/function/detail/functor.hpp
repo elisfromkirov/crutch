@@ -11,16 +11,16 @@ namespace crutch {
 
 namespace detail {
 
-template <typename Closure, typename ReturnValue, typename... Arguments>
+template <typename Routine, typename ReturnValue, typename... Arguments>
 class Functor;
 
-template <typename Closure, typename ReturnValue, typename... Arguments>
-class Functor<Closure, ReturnValue(Arguments...)> final : public Closure,
+template <typename Routine, typename ReturnValue, typename... Arguments>
+class Functor<Routine, ReturnValue(Arguments...)> final : public Routine,
                                                           public IInvokable<ReturnValue(Arguments...)> {
  public:
-  explicit Functor(const Closure& closure) requires Copyable<Closure>;
+  explicit Functor(const Routine& routine) requires Copyable<Routine>;
 
-  explicit Functor(Closure&& closure) noexcept requires Moveable<Closure>;
+  explicit Functor(Routine&& routine) noexcept requires Moveable<Routine>;
 
   ReturnValue Invoke(Arguments&&... arguments) override;
 };

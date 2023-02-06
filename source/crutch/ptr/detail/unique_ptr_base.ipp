@@ -7,14 +7,14 @@ namespace crutch {
 namespace detail {
 
 template <typename Type, DeleterFor<Type> Deleter>
-UniquePtrBase<Type, Deleter>::UniquePtrBase(Type* pointer, Deleter&& deleter) noexcept
-    : Deleter{::std::move(deleter)},
+UniquePtrBase<Type, Deleter>::UniquePtrBase(Type* pointer, const Deleter& deleter) noexcept
+    : Deleter{deleter},
       pointer_{pointer} {
 }
 
 template <typename Type, DeleterFor<Type> Deleter>
 UniquePtrBase<Type, Deleter>::UniquePtrBase(UniquePtrBase&& other) noexcept
-    : Deleter{::std::move(GetDeleter())},
+    : Deleter{GetDeleter()},
       pointer_{other.pointer_} {
   other.pointer_ = nullptr;
 }

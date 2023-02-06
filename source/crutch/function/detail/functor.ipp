@@ -6,18 +6,18 @@ namespace crutch {
 
 namespace detail {
 
-template <typename Closure, typename ReturnValue, typename... Arguments>
-Functor<Closure, ReturnValue(Arguments...)>::Functor(const Closure& closure) requires Copyable<Closure>
-    : Closure{closure} {
+template <typename Routine, typename ReturnValue, typename... Arguments>
+Functor<Routine, ReturnValue(Arguments...)>::Functor(const Routine& routine) requires Copyable<Routine>
+    : Routine{routine} {
 }
 
-template <typename Closure, typename ReturnValue, typename... Arguments>
-Functor<Closure, ReturnValue(Arguments...)>::Functor(Closure&& closure) noexcept requires Moveable<Closure>
-    : Closure{::std::move(closure)} {
+template <typename Routine, typename ReturnValue, typename... Arguments>
+Functor<Routine, ReturnValue(Arguments...)>::Functor(Routine&& routine) noexcept requires Moveable<Routine>
+    : Routine{::std::move(routine)} {
 }
 
-template <typename Closure, typename ReturnValue, typename... Arguments>
-ReturnValue Functor<Closure, ReturnValue(Arguments...)>::Invoke(Arguments&&... arguments) {
+template <typename Routine, typename ReturnValue, typename... Arguments>
+ReturnValue Functor<Routine, ReturnValue(Arguments...)>::Invoke(Arguments&&... arguments) {
   return (*this)(::std::forward<Arguments>(arguments)...);
 }
 

@@ -11,7 +11,7 @@ namespace detail {
 template <typename Type, DeleterFor<Type> Deleter>
 class UniquePtrBase : private Deleter {
  public:
-  UniquePtrBase(Type* pointer, Deleter&& deleter) noexcept;
+  UniquePtrBase(Type* pointer, const Deleter& deleter) noexcept;
 
   UniquePtrBase(const UniquePtrBase& other) = delete;
   UniquePtrBase& operator=(const UniquePtrBase& other) = delete;

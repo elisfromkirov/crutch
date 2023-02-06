@@ -129,3 +129,12 @@ vector/
     vector.ipp
     vector_view.hpp
     vector_view.ipp
+
+# Policy based design #
+
+Memory allocation policy is described by IAllocator interface.
+
+UniquePtr deletion is a lightweight copyable policy.
+
+Comparison policy is described by pure static template parameter Comparator
+Hash function and quality checker are described similary.

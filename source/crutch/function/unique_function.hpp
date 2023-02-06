@@ -18,9 +18,9 @@ class UniqueFunction;
 template <typename ReturnValue, typename... Arguments>
 class UniqueFunction<ReturnValue(Arguments...)> final : private detail::UniqueFunctionBase<ReturnValue(Arguments...)> {
  public:
-  template <typename Closure>
-  requires Copyable<Closure> || Moveable<Closure>
-  explicit UniqueFunction(Closure&& closure, IAllocator* allocator = GetDefaultAllocator());
+  template <typename Routine>
+  requires Copyable<Routine> || Moveable<Routine>
+  explicit UniqueFunction(Routine&& closure, IAllocator* allocator = GetDefaultAllocator());
 
   ReturnValue operator()(Arguments&&... arguments);
 };

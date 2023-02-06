@@ -5,10 +5,10 @@
 namespace crutch {
 
 template <typename ReturnValue, typename... Arguments>
-template <typename Closure>
-requires Copyable<Closure> || Moveable<Closure>
-UniqueFunction<ReturnValue(Arguments...)>::UniqueFunction(Closure&& closure, IAllocator* allocator)
-    : detail::UniqueFunctionBase<ReturnValue(Arguments...)>(::std::forward<Closure>(closure), allocator) {
+template <typename Routine>
+requires Copyable<Routine> || Moveable<Routine>
+UniqueFunction<ReturnValue(Arguments...)>::UniqueFunction(Routine&& closure, IAllocator* allocator)
+    : detail::UniqueFunctionBase<ReturnValue(Arguments...)>(::std::forward<Routine>(closure), allocator) {
 }
 
 template <typename ReturnValue, typename... Arguments>

@@ -7,13 +7,13 @@ namespace crutch {
 namespace detail {
 
 template <typename ReturnValue, typename... Arguments>
-template <typename Closure>
-requires Copyable<Closure> || Moveable<Closure>
-UniqueFunctionBase<ReturnValue(Arguments...)>::UniqueFunctionBase(Closure&& closure, IAllocator* allocator)
+template <typename Routine>
+requires Copyable<Routine> || Moveable<Routine>
+UniqueFunctionBase<ReturnValue(Arguments...)>::UniqueFunctionBase(Routine&& routine, IAllocator* allocator)
     : invokable_{nullptr},
       allocator_{allocator} {
-  auto ptr = Allocate<Functor<Closure, ReturnValue(Arguments...)>>(allocator);
-  invokable_ = Construct(::std::move(ptr), ::std::forward<Closure>(closure));
+  auto ptr = Allocate<Functor<Routine, ReturnValue(Arguments...)>>(allocator);
+  invokable_ = Construct(::std::move(ptr), ::std::forward<Routine>(routine));
 }
 
 template <typename ReturnValue, typename... Arguments>

@@ -13,14 +13,6 @@ namespace detail {
 template <typename Type>
 struct DefaultDeleter {
  public:
-  DefaultDeleter() = default;
-
-  template <DerivedFrom<Type> DerivedType>
-  explicit DefaultDeleter(DefaultDeleter<DerivedType>&& other) noexcept;
-
-  DefaultDeleter(DefaultDeleter&& other) noexcept = default;
-  DefaultDeleter& operator=(DefaultDeleter&& other) noexcept = default;
-
   void operator()(Type* object) noexcept;
 };
 

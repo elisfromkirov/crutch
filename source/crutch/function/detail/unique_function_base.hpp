@@ -23,9 +23,9 @@ class UniqueFunctionBase;
 template <typename ReturnValue, typename... Arguments>
 class UniqueFunctionBase<ReturnValue(Arguments...)> {
  public:
-  template <typename Closure>
-  requires Copyable<Closure> || Moveable<Closure>
-  UniqueFunctionBase(Closure&& closure, IAllocator* allocator);
+  template <typename Routine>
+  requires Copyable<Routine> || Moveable<Routine>
+  UniqueFunctionBase(Routine&& routine, IAllocator* allocator);
 
   UniqueFunctionBase(const UniqueFunctionBase& other) = delete;
   UniqueFunctionBase& operator=(const UniqueFunctionBase& other) = delete;

@@ -5,16 +5,15 @@
 namespace crutch {
 
 template <typename Type, DeleterFor<Type> Deleter>
-UniquePtr<Type, Deleter>::UniquePtr(Type* pointer, Deleter&& deleter) noexcept
-    : detail::UniquePtrBase<Type, Deleter>{pointer, ::std::move(deleter)} {
+UniquePtr<Type, Deleter>::UniquePtr(Type* pointer, const Deleter& deleter) noexcept
+    : detail::UniquePtrBase<Type, Deleter>{pointer, deleter} {
 }
 
 template <typename Type, DeleterFor<Type> Deleter>
-template <DerivedFrom<Type> OtherType, DeleterFor<OtherType> OtherDeleter>
-requires Constructible<Deleter, OtherDeleter&&>
-UniquePtr<Type, Deleter>::UniquePtr(UniquePtr<OtherType, OtherDeleter>&& other) noexcept
-    : detail::UniquePtrBase<Type, Deleter>{other.pointer_, Deleter{::std::move(other.GetDeleter())}} {
-  other.pointer_ = nullptr;
+template <DerivedFrom<Type> DerivedType, DeleterFor<DerivedType> DerivedTypeDeleter>
+UniquePtr<Type, Deleter>::UniquePtr(UniquePtr<DerivedType, DerivedTypeDeleter>&& other, const Deleter& deleter) noexcept
+    : detail::UniquePtrBase<Type, Deleter>{other.Get(), deleter} {
+  other.Release();
 }
 
 template <typename Type, DeleterFor<Type> Deleter>
