@@ -147,7 +147,7 @@ void StringBuilder::Ensure(SizeType required_space) {
 template <typename Type>
 void StringBuilder::PushBackImpl(SizeType required_space, const char* format, Type value) {
   Ensure(required_space);
-  size_ += ::std::sprintf(data_ + size_, format, value);
+  size_ += ::snprintf(data_ + size_, capacity_ - size_, format, value);
 }
 
 }  // namespace crutch

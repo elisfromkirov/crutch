@@ -1,18 +1,18 @@
-add_executable(crutch_test)
+add_executable(crutch_tests)
 
 file(GLOB_RECURSE CRUTCH_TESTS_INCLUDE *.hpp)
 file(GLOB_RECURSE CRUTCH_TESTS_SOURCE *.cpp)
 
 message(${CRUTCH_TESTS_SOURCE})
 
-target_sources(crutch_test
+target_sources(crutch_tests
     PUBLIC
         ${CRUTCH_TESTS_INCLUDE}
     PRIVATE
         ${CRUTCH_TESTS_SOURCE}
     )
 
-target_link_libraries(crutch_test
+target_link_libraries(crutch_tests
     PUBLIC
         crutch
     )
