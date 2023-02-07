@@ -40,4 +40,4 @@ jobs:
         run: cmake --build ${{github.workspace}}/build
 
       - name: Test
-        run: build/test/crutch_test
+        run: build/test/crutch_tests
