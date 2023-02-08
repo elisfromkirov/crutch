@@ -3,7 +3,10 @@ add_executable(crutch_tests)
 file(GLOB_RECURSE CRUTCH_TESTS_INCLUDE *.hpp)
 file(GLOB_RECURSE CRUTCH_TESTS_SOURCE *.cpp)
 
-message(${CRUTCH_TESTS_SOURCE})
+target_include_directories(crutch_tests
+    PUBLIC
+        .
+)
 
 target_sources(crutch_tests
     PUBLIC

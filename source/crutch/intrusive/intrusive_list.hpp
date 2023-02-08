@@ -7,16 +7,26 @@ namespace crutch {
 template <typename Type>
 class IntrusiveList {
  public:
-  [[nodiscard]]
-  IntrusiveNode<Type>* Head() noexcept;
+  IntrusiveNode<Type>* Begin() noexcept;
+
+  IntrusiveNode<Type>* End() noexcept;
 
   [[nodiscard]]
-  IntrusiveNode<Type>* Tail() noexcept;
+  IntrusiveNode<Type>* Front() noexcept;
+
+  [[nodiscard]]
+  IntrusiveNode<Type>* Back() noexcept;
 
   [[nodiscard]]
   bool IsEmpty() const noexcept;
 
-  void Insert(IntrusiveNode<Type>* node) noexcept;
+  void PushFront(IntrusiveNode<Type>* node) noexcept;
+
+  void PushBack(IntrusiveNode<Type>* node) noexcept;
+
+  void PopFront() noexcept;
+
+  void PopBack() noexcept;
 
  private:
   IntrusiveNode<Type> node_;
