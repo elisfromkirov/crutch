@@ -18,7 +18,9 @@ class UniqueFunction;
 template <typename ReturnValue, typename... Arguments>
 class UniqueFunction<ReturnValue(Arguments...)> final : private detail::UniqueFunctionBase<ReturnValue(Arguments...)> {
  public:
-  template <typename Routine>
+  template <typename Routine,
+      typename ::std::enable_if_t<
+          !::std::is_same_v<Routine, UniqueFunction<ReturnValue(Arguments...)>>, int> = 0>
   requires Copyable<Routine> || Moveable<Routine>
   explicit UniqueFunction(Routine&& closure, IAllocator* allocator = GetDefaultAllocator());
 

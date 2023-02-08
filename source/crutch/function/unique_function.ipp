@@ -5,7 +5,8 @@
 namespace crutch {
 
 template <typename ReturnValue, typename... Arguments>
-template <typename Routine>
+template <typename Routine,
+    typename std::enable_if_t<!std::is_same_v<Routine, UniqueFunction<ReturnValue(Arguments...)>>, int>>
 requires Copyable<Routine> || Moveable<Routine>
 UniqueFunction<ReturnValue(Arguments...)>::UniqueFunction(Routine&& closure, IAllocator* allocator)
     : detail::UniqueFunctionBase<ReturnValue(Arguments...)>(::std::forward<Routine>(closure), allocator) {
