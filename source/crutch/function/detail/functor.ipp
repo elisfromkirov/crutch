@@ -17,8 +17,8 @@ Functor<Routine, ReturnValue(Arguments...)>::Functor(Routine&& routine) noexcept
 }
 
 template <typename Routine, typename ReturnValue, typename... Arguments>
-ReturnValue Functor<Routine, ReturnValue(Arguments...)>::Invoke(Arguments&&... arguments) {
-  return (*this)(::std::forward<Arguments>(arguments)...);
+ReturnValue Functor<Routine, ReturnValue(Arguments...)>::Invoke(Arguments... arguments) {
+  return (*this)(arguments...);
 }
 
 }  // namespace detail

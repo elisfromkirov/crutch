@@ -22,7 +22,7 @@ class Functor<Routine, ReturnValue(Arguments...)> final : public Routine,
 
   explicit Functor(Routine&& routine) noexcept requires Moveable<Routine>;
 
-  ReturnValue Invoke(Arguments&&... arguments) override;
+  ReturnValue Invoke(Arguments... arguments) override;
 };
 
 }  // namespace detail

@@ -12,8 +12,8 @@ UniqueFunction<ReturnValue(Arguments...)>::UniqueFunction(Routine&& closure, IAl
 }
 
 template <typename ReturnValue, typename... Arguments>
-ReturnValue UniqueFunction<ReturnValue(Arguments...)>::operator()(Arguments&&... arguments) {
-  return this->invokable_->Invoke(::std::forward<Arguments>(arguments)...);
+ReturnValue UniqueFunction<ReturnValue(Arguments...)>::operator()(Arguments... arguments) {
+  return this->invokable_->Invoke(arguments...);
 }
 
 }  // namespace crutch

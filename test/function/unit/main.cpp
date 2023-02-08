@@ -1,8 +1,7 @@
 #include <crutch/function/unique_function.hpp>
-
 #include <crutch/test/test_framework.hpp>
 
-#include <iostream>
+#include <function/util/complex.hpp>
 
 TEST_SUITE(UniqueFunctionUnit) {
   TEST(EmptyLambda) {
@@ -25,7 +24,16 @@ TEST_SUITE(UniqueFunctionUnit) {
       return x + y;
     }};
 
-    ASSERT_EQ(unique_function(13, 4), 17);
+    ASSERT_EQ(unique_function(13, 7), 20);
+  }
+
+  TEST(LambdaWithComplexArgument) {
+    crutch::UniqueFunction<int(const ComplexArgument&)>
+        unique_function{[](const ComplexArgument& x) {
+          return x.copy_only.value + x.move_only.value;
+        }};
+
+    ASSERT_EQ(unique_function(ComplexArgument{crutch::CopyOnly{5}, crutch::MoveOnly{5}}), 10);
   }
 
   TEST(CopyOnlyLambda) {
@@ -35,7 +43,7 @@ TEST_SUITE(UniqueFunctionUnit) {
       return lambda_value.value + x + y;
     }};
 
-    ASSERT_EQ(unique_function(13, 4), 22);
+    ASSERT_EQ(unique_function(13, 7), 25);
   }
 
   TEST(MoveOnlyLambda) {
@@ -45,7 +53,7 @@ TEST_SUITE(UniqueFunctionUnit) {
       return lambda_value.value + x + y;
     }};
 
-    ASSERT_EQ(unique_function(13, 4), 22);
+    ASSERT_EQ(unique_function(13, 7), 25);
   }
 
   TEST(Move) {
@@ -57,6 +65,6 @@ TEST_SUITE(UniqueFunctionUnit) {
 
     auto moved_unique_function = ::std::move(unique_function);
 
-    ASSERT_EQ(moved_unique_function(13, 4), 22);
+    ASSERT_EQ(moved_unique_function(13, 7), 25);
   }
 }

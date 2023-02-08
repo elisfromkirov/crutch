@@ -22,7 +22,7 @@ class UniqueFunction<ReturnValue(Arguments...)> final : private detail::UniqueFu
   requires Copyable<Routine> || Moveable<Routine>
   explicit UniqueFunction(Routine&& closure, IAllocator* allocator = GetDefaultAllocator());
 
-  ReturnValue operator()(Arguments&&... arguments);
+  ReturnValue operator()(Arguments... arguments);
 };
 
 }  // namespace crutch

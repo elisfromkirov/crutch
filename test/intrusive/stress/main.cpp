@@ -1,13 +1,10 @@
 #include <crutch/macro/abort.hpp>
-
 #include <crutch/intrusive/intrusive_list.hpp>
 #include <crutch/intrusive/intrusive_node.hpp>
-
 #include <crutch/test/test_framework.hpp>
 
 #include <intrusive/util/node.hpp>
 
-#include <iostream>
 #include <list>
 #include <random>
 
@@ -16,12 +13,12 @@ TEST_SUITE(IntrusiveStress) {
     crutch::IntrusiveList<Node> list{};
     std::list<int> adversary;
 
-    std::mt19937 gen{42};
+    std::mt19937 gen{524287};
 
     constexpr crutch::SizeType kIterations{100000};
 
     for (crutch::SizeType interation = 0; interation < kIterations; ++interation) {
-      auto action = gen() % 2;
+      auto action = static_cast<unsigned int>(gen()) % static_cast<unsigned int>(2);
       auto value = static_cast<int>(gen());
       switch (action) {
         case 0: {
