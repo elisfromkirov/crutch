@@ -34,14 +34,14 @@ template <typename Type>
 Type* IntrusiveNode<Type>::AsValuePtr() noexcept {
   ASSERT(IsValid(), "intrusive list is invalid");
 
-  return reinterpret_cast<Type*>(this);
+  return static_cast<Type*>(this);
 }
 
 template <typename Type>
 Type& IntrusiveNode<Type>::AsValueRef() noexcept {
   ASSERT(IsValid(), "intrusive list is invalid");
 
-  return *reinterpret_cast<Type*>(this);
+  return *static_cast<Type*>(this);
 }
 
 template <typename Type>
