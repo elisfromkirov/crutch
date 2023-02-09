@@ -36,4 +36,9 @@ void UniquePtr<Type, Deleter>::Release() noexcept {
   this->pointer_ = nullptr;
 }
 
+template <typename Type, DeleterFor<Type> Deleter>
+void UniquePtr<Type, Deleter>::Swap(UniquePtr& other) noexcept {
+  detail::UniquePtrBase<Type, Deleter>::Swap(other);
+}
+
 }  // namespace crutch

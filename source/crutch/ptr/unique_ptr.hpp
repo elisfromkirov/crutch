@@ -26,6 +26,8 @@ class UniquePtr final : private detail::UniquePtrBase<Type, Deleter> {
   Type* Get() const noexcept;
 
   void Release() noexcept;
+
+  void Swap(UniquePtr& other) noexcept;
 };
 
 }  // namespace crutch
