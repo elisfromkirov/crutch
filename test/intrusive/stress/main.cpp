@@ -1,6 +1,5 @@
 #include <crutch/macro/abort.hpp>
 #include <crutch/intrusive/intrusive_list.hpp>
-#include <crutch/intrusive/intrusive_node.hpp>
 #include <crutch/test/test_framework.hpp>
 
 #include <intrusive/util/node.hpp>
@@ -42,7 +41,6 @@ TEST_SUITE(IntrusiveStress) {
 
     for (crutch::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = gen() % 2;
-      auto value = static_cast<int>(gen());
       switch (action) {
         case 0: {
           auto node = list.Front();

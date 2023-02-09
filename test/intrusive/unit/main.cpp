@@ -1,6 +1,5 @@
 #include <crutch/test/test_framework.hpp>
 #include <crutch/intrusive/intrusive_list.hpp>
-#include <crutch/intrusive/intrusive_node.hpp>
 
 #include <intrusive/util/node.hpp>
 
