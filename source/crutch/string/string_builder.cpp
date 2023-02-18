@@ -2,11 +2,6 @@
 
 namespace crutch {
 
-StringBuilder::StringBuilder(const String& string)
-    : detail::StringBuilderBase{string.capacity_, string.allocator_} {
-  PushBack(string.View());
-}
-
 StringBuilder::StringBuilder(String&& string) noexcept
     : detail::StringBuilderBase{string.data_, string.size_, string.capacity_, string.allocator_} {
   string.data_ = nullptr;
@@ -127,9 +122,9 @@ void StringBuilder::PopBack() noexcept {
 }
 
 String StringBuilder::ToString() && noexcept {
-  auto data = ::std::exchange(data_, nullptr);
-  auto size = ::std::exchange(size_, 0);
-  auto capacity = std::exchange(capacity_, 0);
+  auto data = Exchange(data_, nullptr);
+  auto size = Exchange(size_, 0);
+  auto capacity = Exchange(capacity_, 0);
   auto allocator = allocator_;
   return String{data, size, capacity, allocator};
 }
@@ -140,7 +135,7 @@ bool StringBuilder::IsValid() const noexcept {
 
 void StringBuilder::Ensure(SizeType required_space) {
   if (size_ + required_space >= capacity_) {
-    Reserve(capacity_ * default_growth_factor);
+    Reserve(capacity_ * kDefaultGrowthFactor);
   }
 }
 

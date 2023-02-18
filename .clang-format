@@ -5,11 +5,11 @@ AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLambdasOnASingleLine: None
 AllowShortEnumsOnASingleLine: false
-DerivePointerAlignment: false
-PointerAlignment: Left
-SortIncludes: Never
-PackConstructorInitializers: Never
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: AfterComma
 ColumnLimit: 120
-IndentRequires: false
+DerivePointerAlignment: false
+IndentRequiresClause: false
+PointerAlignment: Left
+PackConstructorInitializers: Never
+SortIncludes: Never

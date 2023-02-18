@@ -14,17 +14,16 @@ namespace crutch {
 
 class StringBuilder final : private detail::StringBuilderBase {
  public:
-  static constexpr SizeType default_capacity{1024};
+  static constexpr SizeType kDefaultCapacity{1024};
 
-  static constexpr SizeType default_growth_factor{2};
+  static constexpr SizeType kDefaultGrowthFactor{2};
 
  public:
-  explicit StringBuilder(SizeType capacity = default_capacity, IAllocator* allocator = GetDefaultAllocator());
-
-  explicit StringBuilder(const String& string);
+  explicit StringBuilder(SizeType capacity = kDefaultCapacity, IAllocator* allocator = GetDefaultAllocator());
 
   explicit StringBuilder(String&& string) noexcept;
 
+  [[nodiscard]]
   char Back() noexcept;
 
   [[nodiscard]]

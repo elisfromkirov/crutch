@@ -68,4 +68,8 @@ bool String::IsValid() const noexcept {
   return data_ != nullptr && size_ < capacity_ && capacity_ != 0 && allocator_ != nullptr;
 }
 
+bool operator==(const String& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) == 0;
+}
+
 }  // namespace crutch

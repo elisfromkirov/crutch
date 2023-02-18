@@ -16,7 +16,7 @@ TEST_SUITE(IntrusiveStress) {
 
     constexpr crutch::SizeType kIterations{100000};
 
-    for (crutch::SizeType interation = 0; interation < kIterations; ++interation) {
+    for (crutch::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = static_cast<unsigned int>(gen()) % static_cast<unsigned int>(2);
       auto value = static_cast<int>(gen());
       switch (action) {
@@ -43,16 +43,16 @@ TEST_SUITE(IntrusiveStress) {
       auto action = gen() % 2;
       switch (action) {
         case 0: {
-          auto node = list.Front();
+          auto node = list.Front()->AsValuePtr();
           list.PopFront();
+          delete node;
           adversary.pop_front();
-          delete node;
-        } break;       
+        } break;
         case 1: {
-          auto node = list.Back();
+          auto node = list.Back()->AsValuePtr();
           list.PopBack();
-          adversary.pop_back();
           delete node;
+          adversary.pop_back();
         } break;
         default: {
           ABORT();

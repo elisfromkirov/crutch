@@ -7,7 +7,7 @@ namespace detail {
 StringBuilderBase::StringBuilderBase(SizeType capacity, IAllocator* allocator)
     : data_{static_cast<char*>(allocator->Allocate(capacity, kMaxAlignment))},
       size_{0},
-      capacity_{0},
+      capacity_{capacity},
       allocator_{allocator} {
 }
 

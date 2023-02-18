@@ -134,14 +134,23 @@ vector/
 
 Memory allocation policy is described by IAllocator interface.
 
-UniquePtr deletion is a lightweight copyable policy.
+UniquePtr deletion is a lightweight copyable policy?
 
 Comparison policy is described by pure static template parameter Comparator
 Hash function and quality checker are described similary.
 
-
 ensure something
-
 assure someone
 
 add class invariant checkers
+
+refactor unique_ptr
+replace deleter by pointer to allocator interface
+
+relationship between string builder and string
+which functionality is part of string builder and which is part of string
+
+it seems like we need an string_builder concept or interface
+
+I found interesting question. What would be better auto or auto* for pointers?
+

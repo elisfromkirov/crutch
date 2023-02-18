@@ -17,10 +17,10 @@ class StringBuilder;
 
 namespace crutch {
 
-class String final : detail::StringBase {
+class String final : private detail::StringBase {
  friend class StringBuilder;
 
- public:
+public:
   [[nodiscard]]
   char& operator[](SizeType index) noexcept;
 

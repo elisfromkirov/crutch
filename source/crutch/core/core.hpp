@@ -134,3 +134,12 @@ constexpr static SizeType Max(SizeType lhs, SizeType rhs) {
 }
 
 }  // namespace crutch
+
+namespace crutch {
+
+template <typename Type, typename OtherType = Type>
+constexpr Type Exchange(Type& value, OtherType&& new_value) {
+  return ::std::exchange(value, ::std::forward<OtherType>(new_value));
+}
+
+}  // namespace crutch

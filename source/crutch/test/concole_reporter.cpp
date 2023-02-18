@@ -51,7 +51,7 @@ void ConsoleReporter::TestPassed(const ITest& test) noexcept {
 }
 
 void ConsoleReporter::AssertionFailureOccurred(const ITest& test, const AssertionFailure& assertion_failure) noexcept {
-  std::printf("Test \033[34m%s\033[m \033[32mfailed\033[m by assertion\n", test.Name().Data());
+  std::printf("Test \033[34m%s\033[m \033[31mfailed\033[m by assertion\n", test.Name().Data());
   std::printf("\033[31mAssertion failure:\033[m %s in %s:%zu\n\n",
               assertion_failure.Expression().Data(),
               assertion_failure.Location().File().Data(),
