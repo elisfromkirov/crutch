@@ -13,7 +13,7 @@
 #include <type_traits>
 #include <utility>
 
-#if !defined(ON_DEBUG)
+#ifndef ON_DEBUG
 #define ASSERT(expression, message) ;
 #else
 #define ASSERT(expression, message)    \
