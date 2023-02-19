@@ -2,10 +2,10 @@
 
 #include <crutch/core/core.hpp>
 
+#include <crutch/format/detail/formatter.hpp>
+
 #include <crutch/string/string.hpp>
 #include <crutch/string/string_builder.hpp>
-
-#include <crutch/format/detail/formatter.hpp>
 
 namespace crutch {
 

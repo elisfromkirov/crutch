@@ -2,14 +2,17 @@
 
 #include <crutch/core/core.hpp>
 
+#include <crutch/iterator/const_ptr.hpp>
+#include <crutch/iterator/ptr.hpp>
+
 namespace crutch {
 
 template <typename Type, SizeType size>
 class Array {
  public:
-  using Iterator = Type*;
+  using Iterator = Ptr<Type>;
 
-  using ConstIterator = Type*;
+  using ConstIterator = ConstPtr<Type>;
 
  public:
   Iterator Begin() noexcept;

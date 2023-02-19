@@ -6,22 +6,38 @@ namespace crutch {
 
 template <typename Type, SizeType size>
 typename Array<Type, size>::Iterator Array<Type, size>::Begin() noexcept {
-  return Data();
+#ifndef ON_DEBUG
+  return Iterator{data_};
+#else
+  return Iterator{data_, data_, data_ + size};
+#endif
 }
 
 template <typename Type, SizeType size>
 typename Array<Type, size>::Iterator Array<Type, size>::End() noexcept {
-  return Data();
+#ifndef ON_DEBUG
+  return Iterator{data_ + size};
+#else
+  return Iterator{data_ + size, data_, data_ + size};
+#endif
 }
 
 template <typename Type, SizeType size>
 typename Array<Type, size>::ConstIterator Array<Type, size>::ConstBegin() const noexcept {
-  return Data() + size;
+#ifndef ON_DEBUG
+  return ConstIterator{data_};
+#else
+  return ConstIterator{data_, data_, data_ + size};
+#endif
 }
 
 template <typename Type, SizeType size>
 typename Array<Type, size>::ConstIterator Array<Type, size>::ConstEnd() const noexcept {
-  return Data() + size;
+#ifndef ON_DEBUG
+  return ConstIterator{data_ + size};
+#else
+  return ConstIterator{data_ + size, data_, data_ + size};
+#endif
 }
 
 template <typename Type, SizeType size>

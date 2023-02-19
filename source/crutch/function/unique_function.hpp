@@ -5,10 +5,10 @@
 
 #include <crutch/core/core.hpp>
 
+#include <crutch/function/detail/unique_function_base.hpp>
+
 #include <crutch/memory/allocator.hpp>
 #include <crutch/memory/default.hpp>
-
-#include <crutch/function/detail/unique_function_base.hpp>
 
 namespace crutch {
 
