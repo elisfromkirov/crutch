@@ -31,28 +31,44 @@ template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::Begin() noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-  return this->data_;
+#ifndef ON_DEBUG
+  return Iterator{this->data_};
+#else
+  return Iterator{this->data_, this->data_, this->data_ + this->size_};
+#endif
 }
 
 template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::End() noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-  return this->data_ + this->size_;
+#ifndef ON_DEBUG
+  return Iterator{this->data_ + this->size_};
+#else
+  return Iterator{this->data_ + this->size_, this->data_, this->data_ + this->size_};
+#endif
 }
 
 template <typename Type>
 typename Vector<Type>::ConstIterator Vector<Type>::ConstBegin() const noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-  return this->data_;
+#ifndef ON_DEBUG
+  return ConstIterator{this->data_};
+#else
+  return ConstIterator{this->data_, this->data_, this->data_ + this->size_};
+#endif
 }
 
 template <typename Type>
 typename Vector<Type>::ConstIterator Vector<Type>::ConstEnd() const noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-  return this->data_ + this->size_;
+#ifndef ON_DEBUG
+  return ConstIterator{this->data_ + this->size_};
+#else
+  return ConstIterator{this->data_ + this->size_, this->data_, this->data_ + this->size_};
+#endif
 }
 
 template <typename Type>
@@ -179,7 +195,7 @@ void Vector<Type>::EmplaceBack(Arguments&&... arguments) {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   if (this->size_ == this->capacity_) {
-    Reserve(this->capacity_ * default_growth_factor);
+    Reserve(static_cast<SizeType>(static_cast<float>(this->capacity_) * kDefaultGrowthFactor));
   }
   this->ConstructAtEnd(::std::forward<Arguments>(arguments)...);
 }

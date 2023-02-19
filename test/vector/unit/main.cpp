@@ -3,12 +3,10 @@
 #include <crutch/test/test_framework.hpp>
 
 #include <random>
-#include <exception>
 
 TEST_SUITE(VectorUnit) {
   TEST(Iterator) {
     crutch::Vector<int> vector{};
-    const crutch::Vector<int>& ref = vector;
 
     crutch::SizeType num_values{12};
     int values[] = {
@@ -24,9 +22,28 @@ TEST_SUITE(VectorUnit) {
       ASSERT_EQ(*iterator, values[i++]);
     }
     i = 0;
-    for (auto iterator = ref.ConstBegin(); iterator != ref.ConstEnd(); ++iterator) {
-      ASSERT_EQ(*iterator, values[i++]);
+    for (auto const_iterator = vector.ConstBegin(); const_iterator != vector.ConstEnd(); ++const_iterator) {
+      ASSERT_EQ(*const_iterator, values[i++]);
     }
+  }
+
+  TEST(RandomAccess) {
+    crutch::Vector<int> vector{};
+
+    crutch::SizeType num_values{12};
+    int values[] = {
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+    };
+
+    for (crutch::SizeType i = 0; i < num_values; ++i) {
+      vector.PushBack(values[i]);
+    }
+
+    auto iterator = vector.Begin() + 4;
+    ASSERT_EQ(*iterator, 5);
+
+    auto const_iterator = vector.ConstBegin() + 8;
+    ASSERT_EQ(*const_iterator, 9);
   }
 
   TEST(At) {

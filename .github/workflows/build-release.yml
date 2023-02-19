@@ -1,0 +1,43 @@
+name: Build-Debug
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        cxx: [g++-11, clang++-13, clang++-14]
+
+        include:
+          - cxx: g++-11
+            install: sudo apt-get install -y g++-11
+          - cxx: clang++-13
+            install: sudo apt-get install -y clang++-13
+          - cxx: clang++-14
+            install: sudo apt-get install -y clang++-14
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install toolchain
+        run: ${{matrix.install}}
+
+      - name: Make build directory
+        run: mkdir ${{github.workspace}}/build
+
+      - name: Configure cmake
+        env:
+          CXX: ${{matrix.cxx}}
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DDEVELOPER=ON
+
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build
+
+      - name: Test
+        run: build/test/crutch_tests

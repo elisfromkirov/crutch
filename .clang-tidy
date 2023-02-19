@@ -1,5 +1,5 @@
 ---
-Checks: '-*,readability-*'
+Checks: '-*,readability-identifier-naming'
 WarningsAsErrors: '*'
 CheckOptions:
   - key: readability-identifier-naming.NamespaceCase
@@ -46,3 +46,7 @@ CheckOptions:
     value: '1'
   - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
     value: expr-type
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: CamelCase
+  - key: readability-identifier-naming.ConstexprVariablePrefix
+    value: k

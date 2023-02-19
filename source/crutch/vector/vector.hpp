@@ -6,6 +6,9 @@
 
 #include <crutch/core/core.hpp>
 
+#include <crutch/iterator/const_ptr.hpp>
+#include <crutch/iterator/ptr.hpp>
+
 #include <crutch/memory/allocator.hpp>
 #include <crutch/memory/default.hpp>
 
@@ -16,17 +19,17 @@ namespace crutch {
 template <typename Type>
 class Vector : private detail::VectorBase<Type> {
  public:
-  static constexpr SizeType default_capacity{8};
+  static constexpr const SizeType kDefaultCapacity{8};
 
-  static constexpr SizeType default_growth_factor{2};
-
- public:
-  using Iterator = Type*;
-
-  using ConstIterator = const Type*;
+  static constexpr const float kDefaultGrowthFactor{1.5f};
 
  public:
-  explicit Vector(SizeType capacity = default_capacity, IAllocator* allocator = GetDefaultAllocator());
+  using Iterator = Ptr<Type>;
+
+  using ConstIterator = ConstPtr<Type>;
+
+ public:
+  explicit Vector(SizeType capacity = kDefaultCapacity, IAllocator* allocator = GetDefaultAllocator());
 
   Vector(const Vector& other);
   Vector& operator=(const Vector& other);

@@ -13,12 +13,16 @@
 #include <type_traits>
 #include <utility>
 
+#if !defined(ON_DEBUG)
+#define ASSERT(expression, message) ;
+#else
 #define ASSERT(expression, message)    \
   do {                                 \
     if (!(expression)) {               \
       assert((expression) || message); \
     }                                  \
   } while (false)
+#endif
 
 namespace crutch {
 
@@ -55,74 +59,74 @@ struct Limits;
 
 template <>
 struct Limits<Int8> {
-  static constexpr Int8 kMin = ::std::numeric_limits<Int8>::max();
+  static constexpr const Int8 kMin = ::std::numeric_limits<Int8>::max();
 
-  static constexpr Int8 kMax = ::std::numeric_limits<Int8>::max();
+  static constexpr const Int8 kMax = ::std::numeric_limits<Int8>::max();
 
-  static constexpr SizeType kDigits = 4;
+  static constexpr const SizeType kDigits = 4;
 };
 
 template <>
 struct Limits<Uint8> {
-  static constexpr Uint8 kMin = ::std::numeric_limits<Uint8>::max();
+  static constexpr const Uint8 kMin = ::std::numeric_limits<Uint8>::max();
 
-  static constexpr Uint8 kMax = ::std::numeric_limits<Uint8>::max();
+  static constexpr const Uint8 kMax = ::std::numeric_limits<Uint8>::max();
 
-  static constexpr SizeType kDigits = 3;
+  static constexpr const SizeType kDigits = 3;
 };
 
 template <>
 struct Limits<Int16> {
-  static constexpr Int16 kMin = ::std::numeric_limits<Int16>::max();
+  static constexpr const Int16 kMin = ::std::numeric_limits<Int16>::max();
 
-  static constexpr Int16 kMax = ::std::numeric_limits<Int16>::max();
+  static constexpr const Int16 kMax = ::std::numeric_limits<Int16>::max();
 
-  static constexpr SizeType kDigits = 6;
+  static constexpr const SizeType kDigits = 6;
 };
 
 template <>
 struct Limits<Uint16> {
-  static constexpr Uint16 kMin = ::std::numeric_limits<Uint16>::max();
+  static constexpr const Uint16 kMin = ::std::numeric_limits<Uint16>::max();
 
-  static constexpr Uint16 kMax = ::std::numeric_limits<Uint16>::max();
+  static constexpr const Uint16 kMax = ::std::numeric_limits<Uint16>::max();
 
-  static constexpr SizeType kDigits = 5;
+  static constexpr const SizeType kDigits = 5;
 };
 
 template <>
 struct Limits<Int32> {
-  static constexpr Int32 kMin = ::std::numeric_limits<Int32>::max();
+  static constexpr const Int32 kMin = ::std::numeric_limits<Int32>::max();
 
-  static constexpr Int32 kMax = ::std::numeric_limits<Int32>::max();
+  static constexpr const Int32 kMax = ::std::numeric_limits<Int32>::max();
 
-  static constexpr SizeType kDigits = 11;
+  static constexpr const SizeType kDigits = 11;
 };
 
 template <>
 struct Limits<Uint32> {
-  static constexpr Uint32 kMin = ::std::numeric_limits<Uint32>::max();
+  static constexpr const Uint32 kMin = ::std::numeric_limits<Uint32>::max();
 
-  static constexpr Uint32 kMax = ::std::numeric_limits<Uint32>::max();
+  static constexpr const Uint32 kMax = ::std::numeric_limits<Uint32>::max();
 
-  static constexpr SizeType kDigits = 10;
+  static constexpr const SizeType kDigits = 10;
 };
 
 template <>
 struct Limits<Int64> {
-  static constexpr Int64 kMin = ::std::numeric_limits<Int64>::max();
+  static constexpr const Int64 kMin = ::std::numeric_limits<Int64>::max();
 
-  static constexpr Int64 kMax = ::std::numeric_limits<Int64>::max();
+  static constexpr const Int64 kMax = ::std::numeric_limits<Int64>::max();
 
-  static constexpr SizeType kDigits = 20;
+  static constexpr const SizeType kDigits = 20;
 };
 
 template <>
 struct Limits<Uint64> {
-  static constexpr Uint64 kMin = ::std::numeric_limits<Uint64>::max();
+  static constexpr const Uint64 kMin = ::std::numeric_limits<Uint64>::max();
 
-  static constexpr Uint64 kMax = ::std::numeric_limits<Uint64>::max();
+  static constexpr const Uint64 kMax = ::std::numeric_limits<Uint64>::max();
 
-  static constexpr SizeType kDigits = 19;
+  static constexpr const SizeType kDigits = 19;
 };
 
 }  // namespace crutch
