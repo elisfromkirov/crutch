@@ -154,3 +154,29 @@ it seems like we need an string_builder concept or interface
 
 I found interesting question. What would be better auto or auto* for pointers?
 
+
+# documentation style #
+
+For classes
+
+\brief
+
+For functions and methods
+
+\brief
+
+\param
+\param
+\param
+
+\return
+
+\pre
+
+\post
+
+\warning
+
+\note
+
+\details
