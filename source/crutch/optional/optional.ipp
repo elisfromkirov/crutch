@@ -1,4 +1,4 @@
-#ifndef OPTIONAL_BASE_IMPL
+#ifndef OPTIONAL_IMPL
 #error Do not include this file directly
 #endif
 
@@ -55,14 +55,14 @@ Optional<Type>::~Optional() noexcept {
 
 template <typename Type>
 Type& Optional<Type>::Value() noexcept {
-  ASSERT(state_ == kValue, "optional must contain value");
+  ASSERT(state_ == kValue, "optional must contain a value");
 
   return value_;
 }
 
 template <typename Type>
 const Type& Optional<Type>::Value() const noexcept {
-  ASSERT(state_ == kValue, "optional must contain value");
+  ASSERT(state_ == kValue, "optional must contain a value");
 
   return value_;
 }
@@ -82,7 +82,7 @@ void Optional<Type>::Emplace(Arguments&&... arguments) noexcept(kIsNothrowConstr
 }
 
 template <typename Type>
-void Optional<Type>::Reset() {
+void Optional<Type>::Reset() noexcept {
   if (state_ == kValue) {
     state_ = kNull;
     DestroyAt(AddressOf(value_));
