@@ -5,6 +5,26 @@
 namespace crutch {
 
 template <typename Type, typename ErrorType>
+template <typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+Result<Type, ErrorType> Result<Type, ErrorType>::WithValue(Arguments&&... arguments) noexcept(
+    kIsNothrowConstructible<Type, Arguments&&...>) {
+  Result<Type, ErrorType> result{};
+  result.template EmplaceValue(::std::forward<Arguments>(arguments)...);
+  return result;
+}
+
+template <typename Type, typename ErrorType>
+template <typename... Arguments>
+requires Constructible<ErrorType, Arguments&&...>
+Result<Type, ErrorType> Result<Type, ErrorType>::WithError(Arguments&&... arguments) noexcept(
+    kIsNothrowConstructible<ErrorType, Arguments&&...>) {
+  Result<Type, ErrorType> result{};
+  result.template EmplaceError(::std::forward<Arguments>(arguments)...);
+  return result;
+}
+
+template <typename Type, typename ErrorType>
 Result<Type, ErrorType>::Result() noexcept
     : dummy_{},
       state_{kNull} {

@@ -5,6 +5,16 @@
 namespace crutch {
 
 template <typename Type>
+template <typename... Arguments>
+requires Constructible<Type, Arguments&&...>
+Optional<Type> Optional<Type>::WithValue(Arguments&&... arguments) noexcept(
+    kIsNothrowConstructible<Type, Arguments&&...>) {
+  Optional<Type> optional{};
+  optional.template Emplace(::std::forward<Arguments>(arguments)...);
+  return optional;
+}
+
+template <typename Type>
 Optional<Type>::Optional() noexcept
     : dummy_{},
       state_{kNull} {
