@@ -9,7 +9,6 @@ BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: AfterComma
 ColumnLimit: 120
 DerivePointerAlignment: false
-IndentRequiresClause: false
 PointerAlignment: Left
 PackConstructorInitializers: Never
 SortIncludes: Never

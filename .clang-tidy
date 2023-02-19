@@ -34,6 +34,10 @@ CheckOptions:
     value: CamelCase
   - key: readability-identifier-naming.ConstexprVariablePrefix
     value: k
+  - key: readability-identifier-naming.EnumConstantCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumConstantPrefix
+    value: k
   - key: readability-identifier-naming.TypeTemplateParameterCase
     value: CamelCase
   - key: readability-simplify-boolean-expr.ChainedConditionalReturn

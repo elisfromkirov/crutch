@@ -17,7 +17,7 @@ class UniquePtr final : private detail::UniquePtrBase<Type, Deleter> {
   explicit UniquePtr(Type* pointer, const Deleter& deleter = Deleter()) noexcept;
 
   template <DerivedFrom<Type> DerivedType, DeleterFor<DerivedType> DerivedTypeDeleter>
-  UniquePtr(UniquePtr<DerivedType, DerivedTypeDeleter>&& other, const Deleter& = Deleter()) noexcept;
+  UniquePtr(UniquePtr<DerivedType, DerivedTypeDeleter>&& other, const Deleter& deleter = Deleter()) noexcept;
 
   Type& operator*() const noexcept;
 

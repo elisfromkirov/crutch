@@ -6,7 +6,7 @@ namespace crutch {
 
 template <typename Type, typename... Arguments>
 requires Constructible<Type, Arguments&&...>
-Type* Construct(RawPtr<Type> ptr, Arguments&&... arguments) {
+Type* Construct(RawPtr<Type> ptr, Arguments&&... arguments) noexcept(kIsNothrowConstructible<Type, Arguments&&...>) {
   auto pointer = ConstructAt(ptr.Get(), ::std::forward<Arguments>(arguments)...);
   ptr.Release();
   return pointer;
@@ -22,7 +22,7 @@ RawPtr<Type> Destroy(Type* object, IAllocator* allocator) noexcept {
 
 template <typename Type, typename... Arguments>
 requires Constructible<Type, Arguments&&...>
-Type* ConstructAt(Type* ptr, Arguments&&... arguments) {
+Type* ConstructAt(Type* ptr, Arguments&&... arguments) noexcept(kIsNothrowConstructible<Type, Arguments&&...>) {
   ASSERT(ptr != nullptr, "ptr must be a valid pointer");
 
   return new (ptr) Type(::std::forward<Arguments>(arguments)...);
