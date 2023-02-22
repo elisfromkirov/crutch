@@ -1,6 +1,6 @@
-#include <crutch/macro/abort.hpp>
-#include <crutch/intrusive/intrusive_list.hpp>
-#include <crutch/test/test_framework.hpp>
+#include <wheel/macro/abort.hpp>
+#include <wheel/intrusive/intrusive_list.hpp>
+#include <wheel/test/test_framework.hpp>
 
 #include <intrusive/util/node.hpp>
 
@@ -9,14 +9,14 @@
 
 TEST_SUITE(IntrusiveStress) {
   TEST(Stress) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
     std::list<int> adversary;
 
     std::mt19937 gen{524287};
 
-    constexpr crutch::SizeType kIterations{100000};
+    constexpr wheel::SizeType kIterations{100000};
 
-    for (crutch::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = static_cast<unsigned int>(gen()) % static_cast<unsigned int>(2);
       auto value = static_cast<int>(gen());
       switch (action) {
@@ -39,7 +39,7 @@ TEST_SUITE(IntrusiveStress) {
       ASSERT_EQ(list.Back()->AsValuePtr()->value, adversary.back());
     }
 
-    for (crutch::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = gen() % 2;
       switch (action) {
         case 0: {

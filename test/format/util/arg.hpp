@@ -1,15 +1,15 @@
 #pragma once
 
-#include <crutch/format/format_traits.hpp>
+#include <wheel/format/format_traits.hpp>
 
 struct Arg {
 };
 
-namespace crutch {
+namespace wheel {
 
 template <>
 struct FormatTraits<Arg> {
   static void Format(StringBuilder& builder, [[maybe_unused]] const Arg& value);
 };
 
-}  // namespace crutch
+}  // namespace wheel

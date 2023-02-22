@@ -1,16 +1,16 @@
-add_library(crutch)
+add_library(wheel)
 
-file(GLOB_RECURSE CRUTCH_INCLUDE *.hpp)
-file(GLOB_RECURSE CRUTCH_SOURCE *.cpp)
+file(GLOB_RECURSE wheel_INCLUDE *.hpp)
+file(GLOB_RECURSE wheel_SOURCE *.cpp)
 
-target_include_directories(crutch
+target_include_directories(wheel
     PUBLIC
         .
     )
 
-target_sources(crutch
+target_sources(wheel
     PUBLIC
-        ${CRUTCH_INCLUDE}
+        ${wheel_INCLUDE}
     PRIVATE
-        ${CRUTCH_SOURCE}
+        ${wheel_SOURCE}
     )

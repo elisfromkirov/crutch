@@ -1,5 +1,5 @@
 ## Overview
 
-The crutch is a reimplementation of useful c++ standard library subset with
-some changes. The crutch also borrows some tools from standard libraries of 
-other languages (such as rust and go).
+The wheel (library's name comes from "reinventing the wheel") is a
+reimplementation of the most useful subset of c++ standard library with some 
+changes. The wheel is also inspired by standard libraries of rust and go.

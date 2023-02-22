@@ -1,6 +1,6 @@
 #include <intrusive/util/node.hpp>
 
 Node::Node(int value) noexcept
-    : crutch::IntrusiveNode<Node>{},
+    : wheel::IntrusiveNode<Node>{},
       value{value} {
 }

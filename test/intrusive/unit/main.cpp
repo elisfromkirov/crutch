@@ -1,26 +1,26 @@
-#include <crutch/test/test_framework.hpp>
-#include <crutch/intrusive/intrusive_list.hpp>
+#include <wheel/test/test_framework.hpp>
+#include <wheel/intrusive/intrusive_list.hpp>
 
 #include <intrusive/util/node.hpp>
 
 TEST_SUITE(IntrusiveUnit) {
   TEST(Iterator) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
 
     Node nodes[] = {Node{1}, Node{2}, Node{3}, Node{4}, Node{5}, Node{6}, Node{7}, Node{8}};
 
-    for (crutch::SizeType i = 0; i < 8; ++i) {
+    for (wheel::SizeType i = 0; i < 8; ++i) {
       list.PushBack(&nodes[i]);
     }
     
-    crutch::SizeType index = 0;
-    for (crutch::IntrusiveNode<Node>* node = list.Begin(); node != list.End(); node = node->Next()) {
+    wheel::SizeType index = 0;
+    for (wheel::IntrusiveNode<Node>* node = list.Begin(); node != list.End(); node = node->Next()) {
       ASSERT_EQ(node->AsValuePtr()->value, nodes[index++].value);
     }
   }
 
   TEST(IsEmpty) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
 
     Node node{0};
 
@@ -44,7 +44,7 @@ TEST_SUITE(IntrusiveUnit) {
   }
 
   TEST(PushFront) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
 
     Node nodes[] = {Node{1}, Node{2}, Node{3}};
 
@@ -59,7 +59,7 @@ TEST_SUITE(IntrusiveUnit) {
   }
 
   TEST(PushBack) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
 
     Node nodes[] = {Node{4}, Node{5}, Node{6}};
 
@@ -74,7 +74,7 @@ TEST_SUITE(IntrusiveUnit) {
   }
 
   TEST(PopFront) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
 
     Node nodes[] = {Node{7}, Node{8}, Node{9}};
 
@@ -95,7 +95,7 @@ TEST_SUITE(IntrusiveUnit) {
   }
 
   TEST(PopBack) {
-    crutch::IntrusiveList<Node> list{};
+    wheel::IntrusiveList<Node> list{};
 
     Node nodes[] = {Node{1}, Node{2}, Node{3}};
 

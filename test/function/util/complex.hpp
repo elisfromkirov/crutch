@@ -1,8 +1,8 @@
-#include <crutch/test/test_framework.hpp>
+#include <wheel/test/test_framework.hpp>
 
 struct ComplexArgument {
-  ComplexArgument(const crutch::CopyOnly& copy_only, crutch::MoveOnly&& move_only);
+  ComplexArgument(const wheel::CopyOnly& copy_only, wheel::MoveOnly&& move_only);
 
-  crutch::CopyOnly copy_only;
-  crutch::MoveOnly move_only;
+  wheel::CopyOnly copy_only;
+  wheel::MoveOnly move_only;
 };
