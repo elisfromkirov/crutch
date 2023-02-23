@@ -1,23 +1,23 @@
-#include <wheel/vector/vector.hpp>
+#include <wheels/vector/vector.hpp>
 
-#include <wheel/test/test_framework.hpp>
+#include <wheels/test/test_framework.hpp>
 
 #include <random>
 
 TEST_SUITE(VectorUnit) {
   TEST(Iterator) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
-    wheel::SizeType num_values{12};
+    wheels::SizeType num_values{12};
     int values[] = {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
     };
 
-    for (wheel::SizeType i = 0; i < num_values; ++i) {
+    for (wheels::SizeType i = 0; i < num_values; ++i) {
       vector.PushBack(values[i]);
     }
 
-    wheel::SizeType i = 0;
+    wheels::SizeType i = 0;
     for (auto iterator = vector.Begin(); iterator != vector.End(); ++iterator) {
       ASSERT_EQ(*iterator, values[i++]);
     }
@@ -28,14 +28,14 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(RandomAccess) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
-    wheel::SizeType num_values{12};
+    wheels::SizeType num_values{12};
     int values[] = {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
     };
 
-    for (wheel::SizeType i = 0; i < num_values; ++i) {
+    for (wheels::SizeType i = 0; i < num_values; ++i) {
       vector.PushBack(values[i]);
     }
 
@@ -47,30 +47,30 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(At) {
-    wheel::Vector<int> vector{};
-    const wheel::Vector<int>& ref = vector;
+    wheels::Vector<int> vector{};
+    const wheels::Vector<int>& ref = vector;
 
-    wheel::SizeType num_values{12};
+    wheels::SizeType num_values{12};
     int values[] = {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
     };
 
-    for (wheel::SizeType i = 0; i < num_values; ++i) {
+    for (wheels::SizeType i = 0; i < num_values; ++i) {
       vector.PushBack(values[i]);
     }
 
-    for (wheel::SizeType i = 0; i < num_values; ++i) {
+    for (wheels::SizeType i = 0; i < num_values; ++i) {
       ASSERT_EQ(vector[i], values[i]);
       ASSERT_EQ(vector.At(i), values[i]);
     }
-    for (wheel::SizeType i = 0; i < num_values; ++i) {
+    for (wheels::SizeType i = 0; i < num_values; ++i) {
       ASSERT_EQ(ref[i], values[i]);
       ASSERT_EQ(ref.At(i), values[i]);
     }
   }
 
   TEST(IsEmpty) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
     ASSERT_TRUE(vector.IsEmpty());
 
@@ -94,7 +94,7 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(Size) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
     vector.PushBack(1);
     ASSERT_EQ(vector.Size(), 1);
@@ -113,8 +113,8 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(PushBack) {
-    wheel::Vector<int> vector{};
-    const wheel::Vector<int>& ref = vector;
+    wheels::Vector<int> vector{};
+    const wheels::Vector<int>& ref = vector;
 
     vector.PushBack(1);
     ASSERT_EQ(vector.Back(), 1);
@@ -130,8 +130,8 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(PopBack) {
-    wheel::Vector<int> vector{};
-    const wheel::Vector<int>& ref = vector;
+    wheels::Vector<int> vector{};
+    const wheels::Vector<int>& ref = vector;
 
     vector.PushBack(1);
     ASSERT_EQ(vector.Back(), 1);
@@ -155,12 +155,12 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(PushBackWithoutReserve) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
     std::mt19937 gen{42};
 
-    constexpr wheel::SizeType kIterations{4};
-    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    constexpr wheels::SizeType kIterations{4};
+    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       int value{static_cast<int>(gen())};
       vector.PushBack(value);
       ASSERT_EQ(vector.Back(), value);
@@ -169,12 +169,12 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(PushBackWithReserve) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
     std::mt19937 gen{42};
 
-    constexpr wheel::SizeType kIterations{12};
-    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    constexpr wheels::SizeType kIterations{12};
+    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       int value{static_cast<int>(gen())};
       vector.PushBack(value);
       ASSERT_EQ(vector.Back(), value);
@@ -183,12 +183,12 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(PushBackWithReserves) {
-    wheel::Vector<int> vector{};
+    wheels::Vector<int> vector{};
 
     std::mt19937 gen{42};
 
-    constexpr wheel::SizeType kIterations{36};
-    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    constexpr wheels::SizeType kIterations{36};
+    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       int value{static_cast<int>(gen())};
       vector.PushBack(value);
       ASSERT_EQ(vector.Back(), value);
@@ -197,12 +197,12 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(CopyOnly) {
-    wheel::Vector<wheel::CopyOnly> vector{};
+    wheels::Vector<wheels::CopyOnly> vector{};
 
     std::mt19937 gen{42};
 
-    constexpr wheel::SizeType kIterations{36};
-    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    constexpr wheels::SizeType kIterations{36};
+    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       int value{static_cast<int>(gen())};
       vector.EmplaceBack(value);
       ASSERT_EQ(vector.Back().value, value);
@@ -210,12 +210,12 @@ TEST_SUITE(VectorUnit) {
   }
 
   TEST(MoveOnly) {
-    wheel::Vector<wheel::MoveOnly> vector{};
+    wheels::Vector<wheels::MoveOnly> vector{};
 
     std::mt19937 gen{42};
 
-    constexpr wheel::SizeType kIterations{36};
-    for (wheel::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    constexpr wheels::SizeType kIterations{36};
+    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
       int value{static_cast<int>(gen())};
       vector.EmplaceBack(value);
       ASSERT_EQ(vector.Back().value, value);

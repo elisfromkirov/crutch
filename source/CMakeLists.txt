@@ -1,16 +1,16 @@
-add_library(wheel)
+add_library(wheels)
 
-file(GLOB_RECURSE wheel_INCLUDE *.hpp)
-file(GLOB_RECURSE wheel_SOURCE *.cpp)
+file(GLOB_RECURSE WHEELS_INCLUDE *.hpp)
+file(GLOB_RECURSE WHEELS_SOURCE *.cpp)
 
-target_include_directories(wheel
+target_include_directories(wheels
     PUBLIC
         .
     )
 
-target_sources(wheel
+target_sources(wheels
     PUBLIC
-        ${wheel_INCLUDE}
+        ${WHEELS_INCLUDE}
     PRIVATE
-        ${wheel_SOURCE}
+        ${WHEELS_SOURCE}
     )

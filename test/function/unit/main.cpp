@@ -1,18 +1,18 @@
-#include <wheel/function/unique_function.hpp>
-#include <wheel/test/test_framework.hpp>
+#include <wheels/function/unique_function.hpp>
+#include <wheels/test/test_framework.hpp>
 
 #include <function/util/complex.hpp>
 
 TEST_SUITE(UniqueFunctionUnit) {
   TEST(EmptyLambda) {
-    wheel::UniqueFunction<void()> unique_function{[]() {
+    wheels::UniqueFunction<void()> unique_function{[]() {
     }};
 
     unique_function();
   }
 
   TEST(LambdaWithReturnValue) {
-    wheel::UniqueFunction<int()> unique_function{[]() {
+    wheels::UniqueFunction<int()> unique_function{[]() {
       return 42;
     }};
 
@@ -20,7 +20,7 @@ TEST_SUITE(UniqueFunctionUnit) {
   }
 
   TEST(LambdaWithArguments) {
-    wheel::UniqueFunction<int(int, int)> unique_function{[](int x, int y) {
+    wheels::UniqueFunction<int(int, int)> unique_function{[](int x, int y) {
       return x + y;
     }};
 
@@ -28,18 +28,18 @@ TEST_SUITE(UniqueFunctionUnit) {
   }
 
   TEST(LambdaWithComplexArgument) {
-    wheel::UniqueFunction<int(const ComplexArgument&)>
+    wheels::UniqueFunction<int(const ComplexArgument&)>
         unique_function{[](const ComplexArgument& x) {
           return x.copy_only.value + x.move_only.value;
         }};
 
-    ASSERT_EQ(unique_function(ComplexArgument{wheel::CopyOnly{5}, wheel::MoveOnly{5}}), 10);
+    ASSERT_EQ(unique_function(ComplexArgument{wheels::CopyOnly{5}, wheels::MoveOnly{5}}), 10);
   }
 
   TEST(CopyOnlyLambda) {
-    wheel::CopyOnly value{5};
+    wheels::CopyOnly value{5};
 
-    wheel::UniqueFunction<int(int, int)> unique_function{[lambda_value = value](int x, int y) {
+    wheels::UniqueFunction<int(int, int)> unique_function{[lambda_value = value](int x, int y) {
       return lambda_value.value + x + y;
     }};
 
@@ -47,9 +47,9 @@ TEST_SUITE(UniqueFunctionUnit) {
   }
 
   TEST(MoveOnlyLambda) {
-    wheel::MoveOnly value{5};
+    wheels::MoveOnly value{5};
 
-    wheel::UniqueFunction<int(int, int)> unique_function{[lambda_value = std::move(value)](int x, int y) {
+    wheels::UniqueFunction<int(int, int)> unique_function{[lambda_value = std::move(value)](int x, int y) {
       return lambda_value.value + x + y;
     }};
 
@@ -57,9 +57,9 @@ TEST_SUITE(UniqueFunctionUnit) {
   }
 
   TEST(Move) {
-    wheel::MoveOnly value{5};
+    wheels::MoveOnly value{5};
 
-    wheel::UniqueFunction<int(int, int)> unique_function{[lambda_value = std::move(value)](int x, int y) {
+    wheels::UniqueFunction<int(int, int)> unique_function{[lambda_value = std::move(value)](int x, int y) {
       return lambda_value.value + x + y;
     }};
 

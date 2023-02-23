@@ -1,21 +1,21 @@
-add_executable(wheel_tests)
+add_executable(wheels_tests)
 
-file(GLOB_RECURSE wheel_TESTS_INCLUDE *.hpp)
-file(GLOB_RECURSE wheel_TESTS_SOURCE *.cpp)
+file(GLOB_RECURSE WHEELS_TESTS_INCLUDE *.hpp)
+file(GLOB_RECURSE WHEELS_TESTS_SOURCE *.cpp)
 
-target_include_directories(wheel_tests
+target_include_directories(wheels_tests
     PUBLIC
         .
 )
 
-target_sources(wheel_tests
+target_sources(wheels_tests
     PUBLIC
-        ${wheel_TESTS_INCLUDE}
+        ${WHEELS_TESTS_INCLUDE}
     PRIVATE
-        ${wheel_TESTS_SOURCE}
+        ${WHEELS_TESTS_SOURCE}
     )
 
-target_link_libraries(wheel_tests
+target_link_libraries(wheels_tests
     PUBLIC
-        wheel
+        wheels
     )

@@ -1,5 +1,5 @@
 ## Overview
 
-The wheel (library's name comes from "reinventing the wheel") is a
+The wheels (library's name comes from "reinventing the wheels") is a
 reimplementation of the most useful subset of c++ standard library with some 
-changes. The wheel is also inspired by standard libraries of rust and go.
+changes. The wheels is also inspired by standard libraries of rust and go.

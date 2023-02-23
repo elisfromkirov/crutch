@@ -34,10 +34,10 @@ jobs:
       - name: Configure cmake
         env:
           CXX: ${{matrix.cxx}}
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DDEVELOPER=ON
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TEST=ON
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build
 
       - name: Test
-        run: build/test/wheel_tests
+        run: build/test/wheels_tests

@@ -1,8 +1,8 @@
-#include <wheel/test/test_framework.hpp>
+#include <wheels/test/test_framework.hpp>
 
 struct ComplexArgument {
-  ComplexArgument(const wheel::CopyOnly& copy_only, wheel::MoveOnly&& move_only);
+  ComplexArgument(const wheels::CopyOnly& copy_only, wheels::MoveOnly&& move_only);
 
-  wheel::CopyOnly copy_only;
-  wheel::MoveOnly move_only;
+  wheels::CopyOnly copy_only;
+  wheels::MoveOnly move_only;
 };

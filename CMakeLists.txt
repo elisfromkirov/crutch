@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.21)
-project(wheel)
+project(wheels)
 
 set(CMAKE_CXX_STANDARD 20)
 
 option(ADDRESS_SANITIZER "enable address sanitizer" OFF)
 
-option(DEVELOPER "enable tests" OFF)
+option(BUILD_TEST "build tests" OFF)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_options("-Wall")
@@ -28,7 +28,7 @@ endif()
 
 add_subdirectory(source)
 
-if (DEVELOPER)
+if (BUILD_TEST)
     add_subdirectory(test)
 endif()
 
