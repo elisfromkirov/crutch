@@ -17,10 +17,10 @@ TEST_SUITE(FormatUnit) {
     wheels::StringView expected_string{"-1 2 -3 4"};
 
     auto string = wheels::Format("{} {} {} {}",
-                                 static_cast<wheels::Int8>(-1),
-                                 static_cast<wheels::Int16>(2),
-                                 static_cast<wheels::Int32>(-3),
-                                 static_cast<wheels::Int64>(4));
+                                 static_cast<Int8>(-1),
+                                 static_cast<Int16>(2),
+                                 static_cast<Int32>(-3),
+                                 static_cast<Int64>(4));
 
     ASSERT_EQ(string, expected_string);
   }
@@ -29,10 +29,10 @@ TEST_SUITE(FormatUnit) {
     wheels::StringView expected_string{"15 26 37 48"};
 
     wheels::String string = wheels::Format("{} {} {} {}",
-                                           static_cast<wheels::Uint8>(15),
-                                           static_cast<wheels::Uint16>(26),
-                                           static_cast<wheels::Uint32>(37),
-                                           static_cast<wheels::Uint64>(48));
+                                           static_cast<Uint8>(15),
+                                           static_cast<Uint16>(26),
+                                           static_cast<Uint32>(37),
+                                           static_cast<Uint64>(48));
 
     ASSERT_EQ(string, expected_string);
   }

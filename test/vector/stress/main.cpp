@@ -12,13 +12,13 @@ TEST_SUITE(VectorStress) {
 
     std::mt19937 gen{524287};
 
-    constexpr wheels::SizeType kIterations{100000};
-    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    constexpr SizeType kIterations{100000};
+    for (SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto value = static_cast<int>(gen());
       adversary.push_back(value);
       vector.PushBack(value);
     }
-    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    for (SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = static_cast<unsigned int>(gen()) % static_cast<unsigned int>(3);
       switch (action) {
         case 0: {
@@ -31,7 +31,7 @@ TEST_SUITE(VectorStress) {
           vector.PopBack();
         } break;
         case 2: {
-          wheels::SizeType index = static_cast<wheels::SizeType>(gen()) % vector.Size();
+          SizeType index = static_cast<SizeType>(gen()) % vector.Size();
           ASSERT_EQ(adversary[index], vector[index]);          
         } break;
         default: {

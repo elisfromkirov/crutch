@@ -14,9 +14,9 @@ TEST_SUITE(IntrusiveStress) {
 
     std::mt19937 gen{524287};
 
-    constexpr wheels::SizeType kIterations{100000};
+    constexpr SizeType kIterations{100000};
 
-    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    for (SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = static_cast<unsigned int>(gen()) % static_cast<unsigned int>(2);
       auto value = static_cast<int>(gen());
       switch (action) {
@@ -39,7 +39,7 @@ TEST_SUITE(IntrusiveStress) {
       ASSERT_EQ(list.Back()->AsValuePtr()->value, adversary.back());
     }
 
-    for (wheels::SizeType iteration = 0; iteration < kIterations; ++iteration) {
+    for (SizeType iteration = 0; iteration < kIterations; ++iteration) {
       auto action = gen() % 2;
       switch (action) {
         case 0: {

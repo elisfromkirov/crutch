@@ -24,15 +24,11 @@
   } while (false)
 #endif
 
-namespace wheels {
+using Unit = std::monostate;
 
 using Byte = ::std::uint8_t;
 
 using SizeType = ::std::size_t;
-
-}  // namespace wheels
-
-namespace wheels {
 
 using Int8 = ::std::int8_t;
 
@@ -49,8 +45,6 @@ using Uint16 = ::std::uint16_t;
 using Uint32 = ::std::uint32_t;
 
 using Uint64 = ::std::uint64_t;
-
-}  // namespace wheels
 
 namespace wheels {
 

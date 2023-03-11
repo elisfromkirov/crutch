@@ -9,11 +9,11 @@ TEST_SUITE(IntrusiveUnit) {
 
     Node nodes[] = {Node{1}, Node{2}, Node{3}, Node{4}, Node{5}, Node{6}, Node{7}, Node{8}};
 
-    for (wheels::SizeType i = 0; i < 8; ++i) {
+    for (SizeType i = 0; i < 8; ++i) {
       list.PushBack(&nodes[i]);
     }
     
-    wheels::SizeType index = 0;
+    SizeType index = 0;
     for (wheels::IntrusiveNode<Node>* node = list.Begin(); node != list.End(); node = node->Next()) {
       ASSERT_EQ(node->AsValuePtr()->value, nodes[index++].value);
     }
