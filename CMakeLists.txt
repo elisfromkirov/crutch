@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(railway)
+project(wheels)
 
 include(cmake/build_options.cmake)
 include(cmake/compile_options.cmake)
