@@ -31,44 +31,28 @@ template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::Begin() noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-#ifndef ON_DEBUG
   return Iterator{this->data_};
-#else
-  return Iterator{this->data_, this->data_, this->data_ + this->size_};
-#endif
 }
 
 template <typename Type>
 typename Vector<Type>::Iterator Vector<Type>::End() noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-#ifndef ON_DEBUG
   return Iterator{this->data_ + this->size_};
-#else
-  return Iterator{this->data_ + this->size_, this->data_, this->data_ + this->size_};
-#endif
 }
 
 template <typename Type>
 typename Vector<Type>::ConstIterator Vector<Type>::ConstBegin() const noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-#ifndef ON_DEBUG
   return ConstIterator{this->data_};
-#else
-  return ConstIterator{this->data_, this->data_, this->data_ + this->size_};
-#endif
 }
 
 template <typename Type>
 typename Vector<Type>::ConstIterator Vector<Type>::ConstEnd() const noexcept {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
-#ifndef ON_DEBUG
   return ConstIterator{this->data_ + this->size_};
-#else
-  return ConstIterator{this->data_ + this->size_, this->data_, this->data_ + this->size_};
-#endif
 }
 
 template <typename Type>
@@ -160,7 +144,7 @@ void Vector<Type>::Reserve(SizeType capacity) requires Copyable<Type> && (!Movea
   ASSERT(this->capacity_ < capacity, "capacity must be greater than current vector's capacity");
 
   Vector<Type> tmp{capacity, this->allocator_};
-  tmp.CopyToEnd(*this);
+  tmp.Assign(*this);
   this->Swap(tmp);
 }
 
@@ -170,7 +154,7 @@ void Vector<Type>::Reserve(SizeType capacity) requires Moveable<Type> {
   ASSERT(this->capacity_ < capacity, "capacity must be greater than current vector's capacity");
 
   Vector<Type> tmp{capacity, this->allocator_};
-  tmp.MoveToEnd(::std::move(*this));
+  tmp.Assign(::std::move(*this));
   this->Swap(tmp);
 }
 
@@ -209,7 +193,7 @@ void Vector<Type>::PopBack() noexcept {
 }
 
 template <typename Type>
-void Vector<Type>::CopyToEnd(const Vector& other) requires Copyable<Type> {
+void Vector<Type>::Assign(const Vector& other) requires Copyable<Type> {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   for (SizeType i = 0; i < other.size_; ++i) {
@@ -218,7 +202,7 @@ void Vector<Type>::CopyToEnd(const Vector& other) requires Copyable<Type> {
 }
 
 template <typename Type>
-void Vector<Type>::MoveToEnd(Vector&& other) noexcept requires Moveable<Type> {
+void Vector<Type>::Assign(Vector&& other) noexcept requires Moveable<Type> {
   ASSERT(this->data_ == nullptr, "vector is invalid");
 
   for (SizeType i = 0; i < other.size_; ++i) {

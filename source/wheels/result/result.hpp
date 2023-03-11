@@ -19,13 +19,11 @@ class Result {
  public:
   template <typename... Arguments>
   requires Constructible<Type, Arguments&&...>
-  static Result<Type, ErrorType> WithValue(Arguments&&... arguments) noexcept(
-      kIsNothrowConstructible<Type, Arguments&&...>);
+  static Result WithValue(Arguments&&... arguments) noexcept(kIsNothrowConstructible<Type, Arguments&&...>);
 
   template <typename... Arguments>
   requires Constructible<ErrorType, Arguments&&...>
-  static Result<Type, ErrorType> WithError(Arguments&&... arguments) noexcept(
-      kIsNothrowConstructible<ErrorType, Arguments&&...>);
+  static Result WithError(Arguments&&... arguments) noexcept(kIsNothrowConstructible<ErrorType, Arguments&&...>);
 
  private:
   enum State {

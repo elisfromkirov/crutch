@@ -84,10 +84,9 @@ class Vector : private detail::VectorBase<Type> {
 
   void PopBack() noexcept;
 
- private:
-  void CopyToEnd(const Vector& other) requires Copyable<Type>;
+  void Assign(const Vector& other) requires Copyable<Type>;
 
-  void MoveToEnd(Vector&& other) noexcept requires Moveable<Type>;
+  void Assign(Vector&& other) noexcept requires Moveable<Type>;
 };
 
 }  // namespace wheels

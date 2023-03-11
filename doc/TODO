@@ -180,3 +180,9 @@ For functions and methods
 \note
 
 \details
+
+Add fault injection framework as part of wheels, because it is also used in
+multiple projects.
+
+Note for future projects. All stuff that is scattered over many repositories
+must be put into one big repository, because all this things is a core component.

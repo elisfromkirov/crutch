@@ -7,13 +7,7 @@ namespace wheels {
 template <typename Type>
 class Ptr {
  public:
-#if !defined(ON_DEBUG)
   explicit Ptr(Type* ptr = nullptr) noexcept;
-#else
-  Ptr() noexcept;
-
-  Ptr(Type* ptr, Type* begin, Type* end) noexcept;
-#endif
 
   Ptr& operator+=(SizeType offset) noexcept;
   Ptr& operator-=(SizeType offset) noexcept;
@@ -35,13 +29,7 @@ class Ptr {
   bool IsValid() const noexcept;
 
  private:
-#if !defined(ON_DEBUG)
   Type* ptr_;
-#else
-  Type* ptr_;
-  Type* begin_;
-  Type* end_;
-#endif
 };
 
 template <typename Type>
