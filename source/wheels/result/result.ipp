@@ -128,7 +128,7 @@ template <typename... Arguments>
 requires Constructible<Type, Arguments&&...>
 void Result<Type, ErrorType>::EmplaceValue(Arguments&&... arguments) noexcept(
     kIsNothrowConstructible<Type, Arguments&&...>) {
-  ASSERT(state_ == kNull, "optional must be empty");
+  ASSERT(state_ == kNull, "result must be empty");
 
   ConstructAt(AddressOf(value_), ::std::forward<Arguments>(arguments)...);
 }
@@ -138,7 +138,7 @@ template <typename... Arguments>
 requires Constructible<ErrorType, Arguments&&...>
 void Result<Type, ErrorType>::EmplaceError(Arguments&&... arguments) noexcept(
     kIsNothrowConstructible<ErrorType, Arguments&&...>) {
-  ASSERT(state_ == kNull, "optional must be empty");
+  ASSERT(state_ == kNull, "result must be empty");
 
   ConstructAt(AddressOf(error_), ::std::forward<Arguments>(arguments)...);
 }

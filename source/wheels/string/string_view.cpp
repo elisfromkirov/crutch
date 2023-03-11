@@ -20,29 +20,33 @@ StringView::StringView(const char* data, SizeType size) noexcept
 }
 
 const char& StringView::operator[](SizeType index) const noexcept {
-  ASSERT(data_ != nullptr, "string view is invalid");
+  ASSERT(IsValid(), "string view is invalid");
   ASSERT(index < size_, "index must be less than size");
 
   return data_[index];
 }
 
 const char& StringView::At(SizeType index) const noexcept {
-  ASSERT(data_ != nullptr, "string view is invalid");
+  ASSERT(IsValid(), "string view is invalid");
   ASSERT(index < size_, "index must be less than size");
 
   return data_[index];
 }
 
 const char* StringView::Data() const noexcept {
-  ASSERT(data_ != nullptr, "string view is invalid");
+  ASSERT(IsValid(), "string view is invalid");
 
   return data_;
 }
 
 SizeType StringView::Size() const noexcept {
-  ASSERT(data_ != nullptr, "string view is invalid");
+  ASSERT(IsValid(), "string view is invalid");
 
   return size_;
+}
+
+bool StringView::IsValid() const noexcept {
+  return data_ != nullptr;
 }
 
 }  // namespace wheels

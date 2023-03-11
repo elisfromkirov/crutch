@@ -2,21 +2,7 @@
 
 namespace wheels {
 
-char& String::operator[](SizeType index) noexcept {
-  ASSERT(IsValid(), "string is invalid");
-  ASSERT(index < size_, "index must be less than size");
-
-  return data_[index];
-}
-
 const char& String::operator[](SizeType index) const noexcept {
-  ASSERT(IsValid(), "string is invalid");
-  ASSERT(index < size_, "index must be less than size");
-
-  return data_[index];
-}
-
-char& String::At(SizeType index) noexcept {
   ASSERT(IsValid(), "string is invalid");
   ASSERT(index < size_, "index must be less than size");
 
@@ -68,8 +54,69 @@ bool String::IsValid() const noexcept {
   return data_ != nullptr && size_ < capacity_ && capacity_ != 0 && allocator_ != nullptr;
 }
 
+
+bool operator<(const String& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) < 0;
+}
+
+bool operator<(const StringView& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) < 0;
+}
+
+bool operator<(const String& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) < 0;
+}
+
+bool operator<(const StringView& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) < 0;
+}
+
 bool operator==(const String& lhs, const String& rhs) noexcept {
   return ::std::strcmp(lhs.Data(), rhs.Data()) == 0;
+}
+
+bool operator==(const StringView& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) == 0;
+}
+
+bool operator==(const String& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) == 0;
+}
+
+bool operator==(const StringView& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) == 0;
+}
+
+bool operator!=(const String& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) != 0;
+}
+
+bool operator!=(const StringView& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) != 0;
+}
+
+bool operator!=(const String& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) != 0;
+}
+
+bool operator!=(const StringView& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) != 0;
+}
+
+bool operator>(const String& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) > 0;
+}
+
+bool operator>(const StringView& lhs, const String& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) > 0;
+}
+
+bool operator>(const String& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) > 0;
+}
+
+bool operator>(const StringView& lhs, const StringView& rhs) noexcept {
+  return ::std::strcmp(lhs.Data(), rhs.Data()) > 0;
 }
 
 }  // namespace wheels

@@ -11,24 +11,15 @@
 
 namespace wheels {
 
-class StringBuilder;
-
-}  // namespace wheels
-
-namespace wheels {
-
 class String final : private detail::StringBase {
  friend class StringBuilder;
 
+private:
+ String(char* data, SizeType size, SizeType capacity, IAllocator* allocator) noexcept;
+
 public:
   [[nodiscard]]
-  char& operator[](SizeType index) noexcept;
-
-  [[nodiscard]]
   const char& operator[](SizeType index) const noexcept;
-
-  [[nodiscard]]
-  char& At(SizeType index) noexcept;
 
   [[nodiscard]]
   const char& At(SizeType index) const noexcept;
@@ -49,11 +40,40 @@ public:
   StringView View() const noexcept;
 
  private:
-  String(char* data, SizeType size, SizeType capacity, IAllocator* allocator) noexcept;
-
- private:
   [[nodiscard]]
   bool IsValid() const noexcept;
 };
+
+bool operator<(const String& lhs, const String& rhs) noexcept;
+
+bool operator<(const StringView& lhs, const String& rhs) noexcept;
+
+bool operator<(const String& lhs, const StringView& rhs) noexcept;
+
+bool operator<(const StringView& lhs, const StringView& rhs) noexcept;
+
+bool operator==(const String& lhs, const String& rhs) noexcept;
+
+bool operator==(const StringView& lhs, const String& rhs) noexcept;
+
+bool operator==(const String& lhs, const StringView& rhs) noexcept;
+
+bool operator==(const StringView& lhs, const StringView& rhs) noexcept;
+
+bool operator!=(const String& lhs, const String& rhs) noexcept;
+
+bool operator!=(const StringView& lhs, const String& rhs) noexcept;
+
+bool operator!=(const String& lhs, const StringView& rhs) noexcept;
+
+bool operator!=(const StringView& lhs, const StringView& rhs) noexcept;
+
+bool operator>(const String& lhs, const String& rhs) noexcept;
+
+bool operator>(const StringView& lhs, const String& rhs) noexcept;
+
+bool operator>(const String& lhs, const StringView& rhs) noexcept;
+
+bool operator>(const StringView& lhs, const StringView& rhs) noexcept;
 
 }  // namespace wheels

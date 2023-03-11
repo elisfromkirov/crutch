@@ -4,7 +4,7 @@
 
 namespace wheels {
 
-class StringView {
+class StringView final {
  public:
   StringView() noexcept;
 
@@ -23,6 +23,10 @@ class StringView {
 
   [[nodiscard]]
   SizeType Size() const noexcept;
+
+ private:
+  [[nodiscard]]
+  bool IsValid() const noexcept;
 
  private:
   const char* data_;
