@@ -11,7 +11,7 @@ void* Allocator::Allocate(SizeType bytes, SizeType alignment) {
   return ptr;
 }
 
-void Allocator::Deallocate(void* ptr, SizeType bytes, SizeType alignment) noexcept {
+void Allocator::Deallocate(void* ptr, [[maybe_unused]] SizeType bytes, SizeType alignment) noexcept {
   ASSERT(bytes != 0, "number of bytes to deallocate must be greater than zero");
   ASSERT(alignment != 0, "alignment must be greater than zero");
 

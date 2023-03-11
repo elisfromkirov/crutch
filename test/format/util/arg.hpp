@@ -9,7 +9,7 @@ namespace wheels {
 
 template <>
 struct FormatTraits<Arg> {
-  static void Format(StringBuilder& builder, [[maybe_unused]] const Arg& value);
+  static void Format(StringBuilder& builder, const Arg& value);
 };
 
 }  // namespace wheels

@@ -14,7 +14,7 @@
 #include <wheels/test/test_suite.hpp>
 #include <wheels/test/test_suite_registrar.hpp>
 
-#define ASSERT_EXPRESSION(expression)                                  \
+#define ASSERT_EXPRESSION_IMPL(expression)                             \
   do {                                                                 \
     if (!(expression)) {                                               \
       throw ::wheels::AssertionFailure(TO_STRING(expression), HERE()); \
@@ -60,21 +60,23 @@
     return 0;                                                        \
   }
 
-#define ASSERT_EQ(x, y) ASSERT_EXPRESSION((x) == (y))
+#define ASSERT_EQ(x, y) ASSERT_EXPRESSION_IMPL((x) == (y))
 
-#define ASSERT_NE(x, y) ASSERT_EXPRESSION((x) != (y))
+#define ASSERT_NE(x, y) ASSERT_EXPRESSION_IMPL((x) != (y))
 
-#define ASSERT_LT(x, y) ASSERT_EXPRESSION((x) < (y))
+#define ASSERT_LT(x, y) ASSERT_EXPRESSION_IMPL((x) < (y))
 
-#define ASSERT_LE(x, y) ASSERT_EXPRESSION((x) <= (y))
+#define ASSERT_LE(x, y) ASSERT_EXPRESSION_IMPL((x) <= (y))
 
-#define ASSERT_GT(x, y) ASSERT_EXPRESSION((x) > (y))
+#define ASSERT_GT(x, y) ASSERT_EXPRESSION_IMPL((x) > (y))
 
-#define ASSERT_GE(x, y) ASSERT_EXPRESSION((x) >= (y))
+#define ASSERT_GE(x, y) ASSERT_EXPRESSION_IMPL((x) >= (y))
 
-#define ASSERT_TRUE(expression) ASSERT_EXPRESSION((expression))
+#define ASSERT_TRUE(expression) ASSERT_EXPRESSION_IMPL((expression))
 
-#define ASSERT_FALSE(expression) ASSERT_EXPRESSION(!(expression))
+#define ASSERT_FALSE(expression) ASSERT_EXPRESSION_IMPL(!(expression))
+
+#define ASSERT_EXPRESSION(expression) ASSERT_EXPRESSION_IMPL((expression))
 
 #define TEST_SUITE(name) TEST_SUITE_IMPL(CONCAT(TestSuite, name), TO_STRING(name))
 
